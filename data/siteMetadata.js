@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'Alex\' Blog',
   author: 'Alexander Weinmann',
   headerTitle: 'Alex\' Blog',
-  description: 'My Journey as an IT-Consultant',
+  description: 'News From My Journey as an IT-Consultant',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
