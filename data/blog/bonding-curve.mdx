@@ -1,0 +1,30 @@
+---
+title: 'The Bonding Curve Smart Contract'
+date: '2023-11-19'
+lastmod: '2023-11-19'
+tags: ['Blockchain', 'Smart Contracts', 'Ethereum', 'Tokenomics']
+draft: false
+summary: 'A Bonding Curve Smart Contract offering a secure, linear token pricing model, effectively preventing price manipulation and enhancing market stability.'
+images: ['/static/images/twitter-card.png','/static/images/bonding-curve.png']
+---
+
+
+## The Bonding Curve Contract
+
+Ensuring the security and fairness of token trading is paramount.
+The **Bonding Curve Smart Contract**, addresses these challenges head-on.
+Developed using Solidity 0.8.20 and leveraging OpenZeppelin's robust security frameworks, this contract introduces a
+linear token pricing model resistant to common market manipulation tactics like sandwich attacks.
+
+![](/static/images/bonding-curve.png)
+
+### Key Features
+
+- **Linear Bonding Curve Pricing**: The contract employs a linear increase in token price with each sale, starting
+  at 1 ETH and incrementing by 0.01 ETH. This predictable pricing mechanism benefits both new and existing token holders.
+- **Slippage Control**: To protect against market volatility, the contract caps slippage at 5%, ensuring transactions
+   are executed close to expected values.
+- **Buy and Sell Functionality**: Users can easily buy tokens at the current price (subject to a maximum price limit) and sell
+  them back to the contract at the current price, ensuring liquidity and user autonomy.
+- **Transparent and Secure**: Built with transparency and security in mind, the contract's code is open for review and
+  contributions at our GitHub repository [here](https://github.com/lyrx/fot).
