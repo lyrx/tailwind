@@ -11,12 +11,12 @@ const siteMetadata = {
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
-  email: 'address@yoursite.com',
-  github: 'https://github.com',
-  twitter: 'https://twitter.com/Twitter',
-  facebook: 'https://facebook.com',
-  youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com',
+  email: 'enna@mailbox.org',
+  github: 'https://github.com/lyrx',
+  twitter: 'https://twitter.com/lyrx2010',
+  facebook: 'https://www.facebook.com/AlexanderWeinmann65',
+  youtube: 'https://www.youtube.com/channel/UC9iQGIPF9GNWmdm_StgU-Lw',
+  linkedin: 'https://www.linkedin.com/in/alexander-weinmann-5ba898106',
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
