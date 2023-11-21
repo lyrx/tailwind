@@ -1,9 +1,9 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Alex\' Blog',
+  title: 'Alexander\'s Blog',
   author: 'Alexander Weinmann',
-  headerTitle: 'Alex\' Blog',
-  description: 'My Journey as IT-Consultant',
+  headerTitle: 'My\' Blog',
+  description: 'On IT, Web3, AI and Me',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.alexanderweinmann.com/',
