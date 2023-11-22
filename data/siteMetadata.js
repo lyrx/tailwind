@@ -2,7 +2,7 @@
 const siteMetadata = {
   title: 'Alexander\'s Blog',
   author: 'Alexander Weinmann',
-  headerTitle: 'My Blog',
+  headerTitle: 'Alexander\'s Blog',
   description: 'On IT, Web3, AI and Me',
   language: 'en-us',
   theme: 'system', // system, dark or light
