@@ -5,55 +5,43 @@ lastmod: '2023-11-22'
 tags: ['Web3']
 draft: false
 summary: "That Damn Vulnerable DeFi Exploit Revisited"
-images: []
+images: [/static/images/side-entrance-exploit.png]
 ---
+It would be so simple: You borrow money from a bank and then deposit this money into your own account at the same bank.
 
-Es wäre so einfach: Man leiht von einer Bank Geld und zahlt dieses Geld
-dann bei derselben Bank auf das eigene Konto ein.
+![](/static/images/side-entrance-exploit.png)
 
-Weil die Bank aber nicht bemerkt, dass man den Kredit nicht zurück gezahlt hat,
-sondern nur auf das eigene Bankkonto überwiesen hat, hält sie den Kredit für
-beglichen.
+However, because the bank does not realize that the loan has not been paid back,
+but only transferred to one's own bank account, it considers the loan settled.
 
-Das kann nur dann passieren, wenn diese Bank kein gute Buchführung betreibt,
-sondern stattdessen die Kreditbuchhaltung mit der Buchhaltung für die Konten vermischt.
+This can only happen if the bank does not maintain good bookkeeping but instead mixes loan
+accounting with the accounting for the accounts.
 
-Selbstverständlich kann das in der realen Finanzwelt heute nicht passieren,
-aber mit Smart Contracts im DeFi-Umfeld eben schon.
-Jedenfalls  suggeriert das dieses Beispiel von
-[damnvulnerabledefi](https://www.damnvulnerabledefi.xyz/challenges/side-entrance/).
+Of course, this cannot happen in today's real financial world, but it can in Smart Contracts in the DeFi environment.
+At least that's what this example from [damnvulnerabledefi](https://www.damnvulnerabledefi.xyz/challenges/side-entrance/) suggests.
 
-Wir lernen daraus, dass wir bei Smart Contracts immer mit zweiterlei Augen
-schauen müssen. Das eine Auge ist das Auge des Finanzbuchhalters, der
-genau wissen muss, wohin das Geld fliesst, und woher es kommt, und warum
-die Geldflüsse geschehen. Das zweite Auge ist das Auge eines Software-Entwicklers,
-der darauf achten muss, das die Software, die er entwickelt, genau das tut,
-was sie tun soll.
+We learn from this that we must always look at Smart Contracts with two sets of eyes.
+One eye is the eye of the financial accountant, who needs to know exactly where the money is going,
+ where it is coming from, and why the money flows are happening.
+The second eye is that of a software developer, who must ensure that the software
+he develops does exactly what it is supposed to do.
 
-So gesehen ist die Arbeit des Smart-Contract-Entwicklers doppelt schwierig,
-denn er muss sowohl die Denkweise des Finanzbuchhalters beherrschen, als auch die
-eines Programmierers.
+In this sense, the work of a Smart Contract developer is doubly difficul
+as he must master both the mindset of the financial accountant and that of a programmer.
 
-Das hier vorliegende Beispiel zeigt eindrücklich, warum beide Sichtweisen
-gleichzeitig nötig sind. Dem Finanzbuchhalter war sofort aufgefallen,
-dass hier etwas nicht stimmen kann. Der Smart-Contract-Entwickler aber
-ist in solchen Fragen unerfahren. Er betrachtet diesen
+The example here vividly shows why both perspectives are simultaneously necessary.
+The financial accountant immediately noticed that something was amiss. The Smart Contract developer, however,
+is inexperienced in such matters. He views this
 [Smart Contract](https://github.com/tinchoabbate/damn-vulnerable-defi/blob/v3.0.0/contracts/side-entrance/SideEntranceLenderPool.sol)
-aus einer unzulässigerweise vereinfachten  Perspektive. Er unterscheidet nicht
-zwischen dem Geld, das dem Smart Contract selbst zugeordnet ist, und dem
-Kreditkonto eines Kreditnehmers. Deshalb kann ihm an dieser Stelle  ein
-entscheidender Fehler unterlaufen.
+from an impermissibly simplified perspective. He does not differentiate between the money assigned
+to the Smart Contract itself and the loan account of a borrower. Therefore, he can make a crucial mistake at this point.
 
-Wir müssen hier davon ausgehen, dass der Angreifer in diesem Falle klüger ist: Er erkennt,
-vermutlich weil er den
-[Sourcecode des Smart Contracts](https://github.com/tinchoabbate/damn-vulnerable-defi/blob/v3.0.0/contracts/side-entrance/SideEntranceLenderPool.sol)
-kennt, die Schwachstelle nicht nur, er kann sich sogar eine Strategie ausdenken,
-durch die er diesen Fehler ausnutzen kann.
+We must assume here that the attacker is smarter in this case: Probably because he
+knows the [source code of the Smart Contract](https://github.com/tinchoabbate/damn-vulnerable-defi/blob/v3.0.0/contracts/side-entrance/SideEntranceLenderPool.sol), he not only recognizes the vulnerability but can even devise a strategy to exploit this error.
 
-Die Sicherheit von Smart Cntracts ist ein evolutionärer Prozess. Etwas platt ausgedrückt:
-Aus Fehlern lernen wir. Über die Zeit jedoch überträgt sich die Cleverness des Angrerifers,
-und die Smart Contracts werden besser, sicherer.
+The security of Smart Contracts is an evolutionary process. To put it bluntly:
+We learn from mistakes. Over time, however, the cleverness of the attacker is transferred,
+and the Smart Contracts become better, safer.
 
-Dass damit nicht nur grosse finanzielle Verluste einhergehen, sondern auch viel menschliches
-Leid damit verbunden ist, damit müssen wir wohl leben. Aber anderswo werden noch viel schlimmere
-Kriege geführt ...
+That this is accompanied not only by large financial losses but also by much human suffering
+is something we must live with. Much worse wars are being fought elsewhere...
