@@ -1,10 +1,12 @@
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
-import Logo from '@/data/logo.svg'
+
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
+import Image from 'next/image'
+import logo from '../public/static/images/logo2.png'
 
 const Header = () => {
   return (
@@ -13,7 +15,7 @@ const Header = () => {
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
             <div className="mr-3">
-              <img src={'static/images/logo2.png'} />
+              <Image src={logo} alt="Alexander's Blog" />
             </div>
           </div>
         </Link>
@@ -29,10 +31,8 @@ const Header = () => {
             >
               {link.title}
             </Link>
-          ))}
-        <SearchButton />
-        <ThemeSwitch />
-        <MobileNav />
+          ))}{' '}
+        <SearchButton /> <ThemeSwitch /> <MobileNav />
       </div>
     </header>
   )
