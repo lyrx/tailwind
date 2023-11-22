@@ -1,0 +1,59 @@
+---
+title: "Second Thoughts: The Side Entrance Vulnerability"
+date: '2023-11-22'
+lastmod: '2023-11-22'
+tags: ['Web3']
+draft: false
+summary: "That Damn Vulnerable DeFi Exploit Revisited"
+images: []
+---
+
+Es wäre so einfach: Man leiht von einer Bank Geld und zahlt dieses Geld
+dann bei derselben Bank auf das eigene Konto ein.
+
+Weil die Bank aber nicht bemerkt, dass man den Kredit nicht zurück gezahlt hat,
+sondern nur auf das eigene Bankkonto überwiesen hat, hält sie den Kredit für
+beglichen.
+
+Das kann nur dann passieren, wenn diese Bank kein gute Buchführung betreibt,
+sondern stattdessen die Kreditbuchhaltung mit der Buchhaltung für die Konten vermischt.
+
+Selbstverständlich kann das in der realen Finanzwelt heute nicht passieren,
+aber mit Smart Contracts im DeFi-Umfeld eben schon.
+Jedenfalls  suggeriert das dieses Beispiel von
+[damnvulnerabledefi](https://www.damnvulnerabledefi.xyz/challenges/side-entrance/).
+
+Wir lernen daraus, dass wir bei Smart Contracts immer mit zweiterlei Augen
+schauen müssen. Das eine Auge ist das Auge des Finanzbuchhalters, der
+genau wissen muss, wohin das Geld fliesst, und woher es kommt, und warum
+die Geldflüsse geschehen. Das zweite Auge ist das Auge eines Software-Entwicklers,
+der darauf achten muss, das die Software, die er entwickelt, genau das tut,
+was sie tun soll.
+
+So gesehen ist die Arbeit des Smart-Contract-Entwicklers doppelt schwierig,
+denn er muss sowohl die Denkweise des Finanzbuchhalters beherrschen, als auch die
+eines Programmierers.
+
+Das hier vorliegende Beispiel zeigt eindrücklich, warum beide Sichtweisen
+gleichzeitig nötig sind. Dem Finanzbuchhalter war sofort aufgefallen,
+dass hier etwas nicht stimmen kann. Der Smart-Contract-Entwickler aber
+ist in solchen Fragen unerfahren. Er betrachtet diesen
+[Smart Contract](https://github.com/tinchoabbate/damn-vulnerable-defi/blob/v3.0.0/contracts/side-entrance/SideEntranceLenderPool.sol)
+aus einer unzulässigerweise vereinfachten  Perspektive. Er unterscheidet nicht
+zwischen dem Geld, das dem Smart Contract selbst zugeordnet ist, und dem
+Kreditkonto eines Kreditnehmers. Deshalb kann ihm an dieser Stelle  ein
+entscheidender Fehler unterlaufen.
+
+Wir müssen hier davon ausgehen, dass der Angreifer in diesem Falle klüger ist: Er erkennt,
+vermutlich weil er den
+[Sourcecode des Smart Contracts](https://github.com/tinchoabbate/damn-vulnerable-defi/blob/v3.0.0/contracts/side-entrance/SideEntranceLenderPool.sol)
+kennt, die Schwachstelle nicht nur, er kann sich sogar eine Strategie ausdenken,
+durch die er diesen Fehler ausnutzen kann.
+
+Die Sicherheit von Smart Cntracts ist ein evolutionärer Prozess. Etwas platt ausgedrückt:
+Aus Fehlern lernen wir. Über die Zeit jedoch überträgt sich die Cleverness des Angrerifers,
+und die Smart Contracts werden besser, sicherer.
+
+Dass damit nicht nur grosse finanzielle Verluste einhergehen, sondern auch viel menschliches
+Leid damit verbunden ist, damit müssen wir wohl leben. Aber anderswo werden noch viel schlimmere
+Kriege geführt ...
