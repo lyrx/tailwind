@@ -1,3 +1,5 @@
+'use client'
+
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 
@@ -6,16 +8,21 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 import Image from 'next/image'
-import logo from '../public/static/images/logo2.png'
+import logoBright from '../public/static/images/logo2-bright.png'
+import logoDark from '../public/static/images/logo2-dark.png'
+import { useTheme } from 'next-themes'
 
 const Header = () => {
+  const { theme, setTheme, resolvedTheme } = useTheme()
+
   return (
     <header className="flex items-center justify-between py-10">
       <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
             <div className="mr-3">
-              <Image src={logo} priority={true} alt="Alexander's Blog" />
+              {/* eslint-disable-next-line prettier/prettier */}
+              <Image src={theme === 'dark' ? logoDark : logoBright} priority={true} alt="Alexander's Blog" />
             </div>
           </div>
         </Link>
