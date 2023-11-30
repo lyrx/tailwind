@@ -17,7 +17,9 @@ export default function Page() {
     <>
       <div className="space-y-2 pb-8 pt-6 md:space-y-5">
         <h2 className={h2Classes}>Aspiring Contributor?</h2>
-        <p>This site is for nerds, and it is set up by nerds, specifically for those active in Web3.</p>
+        <p>
+          This site is for nerds, and it is set up by nerds, specifically for those active in Web3.
+        </p>
         <p>If you would like to contribute, apply for the contributor role on github.</p>
         <h2 className={h2Classes}>Active Contributors</h2>
       </div>
