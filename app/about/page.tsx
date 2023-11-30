@@ -16,9 +16,10 @@ export default function Page() {
   return (
     <>
       <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-        <h2 className={h2Classes}>New Author?</h2>
-        <p>This is a blog for nerds, written by nerds.</p>
-        <h2 className={h2Classes}>Active Authors</h2>
+        <h2 className={h2Classes}>Aspiring Contributor?</h2>
+        <p>This site is for nerds, and it is set up by nerds, specifically for those active in Web3.</p>
+        <p>If you would like to contribute, apply for the contributor role on github.</p>
+        <h2 className={h2Classes}>Active Contributors</h2>
       </div>
       <AuthorLayout content={defaultContent}>
         <MDXLayoutRenderer code={defaultAuthor.body.code} />
