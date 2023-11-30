@@ -20,6 +20,7 @@ const ThemeSwitch = () => {
       onClick={() => {
         setTheme(theme === 'dark' || resolvedTheme === 'dark' ? 'light' : 'dark')
       }}
+      title={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
