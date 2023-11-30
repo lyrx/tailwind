@@ -7,6 +7,7 @@ import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
+import LoginButton from './LoginButton'
 import Image from 'next/image'
 import logoBright from '../public/static/images/logo2-bright.png'
 import logoDark from '../public/static/images/logo2-dark.png'
@@ -39,7 +40,7 @@ const Header = () => {
               {link.title}
             </Link>
           ))}{' '}
-        <SearchButton /> <ThemeSwitch /> <MobileNav />
+        <SearchButton /> <ThemeSwitch /> <LoginButton /> <MobileNav />
       </div>
     </header>
   )

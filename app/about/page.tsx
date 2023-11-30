@@ -4,7 +4,7 @@ import AuthorLayout from '@/layouts/AuthorLayout'
 import { coreContent } from 'pliny/utils/contentlayer'
 import { genPageMetadata } from 'app/seo'
 
-export const metadata = genPageMetadata({ title: 'Authors' })
+export const metadata = genPageMetadata({ title: 'About' })
 
 export default function Page() {
   const defaultAuthor = allAuthors.find((p) => p.slug === 'default') as Authors
@@ -16,9 +16,8 @@ export default function Page() {
   return (
     <>
       <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-
         <h2 className={h2Classes}>New Author?</h2>
-        <p>This is a blog for nerds, written by nerds. </p>
+        <p>This is a blog for nerds, written by nerds.</p>
         <h2 className={h2Classes}>Active Authors</h2>
       </div>
       <AuthorLayout content={defaultContent}>
