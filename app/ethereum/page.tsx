@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 
-const MyComponent: React.FC = () => {
+const EthComponent: React.FC = () => {
   const [ethereum, setEthereum] = useState(null)
 
   useEffect(() => {
@@ -22,4 +22,4 @@ const MyComponent: React.FC = () => {
   )
 }
 
-export default MyComponent
+export default EthComponent
