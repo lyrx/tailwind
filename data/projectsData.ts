@@ -9,7 +9,7 @@ const projectsData = [
     title: 'Demo Code: Connect To Infura with a Simple Scala Component',
     description: `Shows how to work precisely and concisely with Scala 3`,
     imgSrc: '/static/images/scalajavademo.png',
-    href: 'https://github.com/lyrx/fot',
+    href: 'https://github.com/lyrx/infura',
   },
 ]
 
