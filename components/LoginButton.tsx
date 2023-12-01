@@ -16,12 +16,7 @@ const LoginButton = () => {
   const background = resolvedTheme === 'light' ? 'white' : 'black'
   const foreground = resolvedTheme === 'light' ? 'gray' : 'white'
   return (
-    <button
-      aria-label="MetaMask Login-Button"
-      onClick={() => {
-      }}
-      title={'Login with MetaMask'}
-    >
+    <button aria-label="MetaMask Login-Button" onClick={() => {}} title={'Login with MetaMask'}>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1">
         <rect width="25" height="25" fill={background} />
         <circle cx="12" cy="12" r="9" fill="none" stroke={foreground} />
