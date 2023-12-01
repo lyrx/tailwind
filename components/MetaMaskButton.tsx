@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
+import Image from 'next/image'
 
-const LoginButton = () => {
+const MetaMaskButton = () => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
 
@@ -22,19 +23,14 @@ const LoginButton = () => {
   const foreground = resolvedTheme === 'light' ? 'gray' : 'white'
   return (
     <a
-      href={'/ethereum'}
-      aria-label="MetaMask Login-Button"
+      href={'/ethereum/metamask'}
+      aria-label="Ethereum and MetaMask"
       onClick={() => {}}
-      title={'Login with MetaMask'}
+      title={'Ethereum and MetaMask'}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1">
-        <rect width="25" height="25" fill={background} />
-        <circle cx="12" cy="12" r="9" fill="none" stroke={foreground} />
-        <circle cx="12" cy="10" r="3" fill={foreground} />
-        <rect x="11" y="12" width="2" height="6" fill={foreground} />
-      </svg>
+     <Image src={"/images/MetaMask_Fox.svg"} alt={"MetaMask Fox"} />
     </a>
   )
 }
 
-export default LoginButton
+export default MetaMaskButton
