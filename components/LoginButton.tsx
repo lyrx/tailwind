@@ -1,16 +1,21 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
-
+import Context from '../app/context/Context'
+import { ethers } from 'ethers'
 const LoginButton = () => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
-
+  const context = useContext(Context)
   // When mounted on client, now we can show the UI
   useEffect(() => {
     // @ts-ignore
     if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
+      context.ethersProvider = {
+        // @ts-ignore
+        web3Provider: new ethers.BrowserProvider(window.ethereum),
+      }
       setMounted(true)
     }
   }, [])

@@ -3,27 +3,28 @@
 import React, { useEffect, useState, useContext } from 'react'
 import Context from '../context/Context'
 import { ethers } from 'ethers'
+
 const EthComponent: React.FC = () => {
-  const [ethereum, setEthereum] = useState(null)
+  const [web3Provider, setWeb3Provider] = useState<ethers.Provider | null | undefined>(null)
+  const [signer, setSigner] = useState<ethers.Signer | null | undefined>(null)
+  const [address, setAddress] = useState<string | null | undefined>(null)
   const context = useContext(Context)
   useEffect(() => {
-    // Ensure ethereum is available
+    const aprovider = context?.ethersProvider?.web3Provider
+    setWeb3Provider(aprovider)
     // @ts-ignore
-    if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
-      context.ethersProvider = {
-        // @ts-ignore
-        web3Provider: new ethers.BrowserProvider(window.ethereum),
-      }
-      // Set ethereum
-      // @ts-ignore
-      setEthereum(window.ethereum)
-    }
-  }, []) // Empty array ensures that effect runs only on mount
-  // @ts-ignore
+    aprovider?.getSigner().then((s) => {
+      setSigner(s)
+      s.getAddress().then((a) => setAddress(a))
+    })
+  }, [context?.ethersProvider?.web3Provider])
   return (
     <div>
-      <p>Window ethereum: {ethereum ? 'Ethereum found' : 'Ethereum not found'}</p>
-      <p>Provider: {JSON.stringify(context.ethersProvider?.web3Provider?.provider)}</p>
+      <p>
+        {typeof address !== 'undefined' && address != null
+          ? `Address: ${JSON.stringify(address)}`
+          : 'Getting Address'}
+      </p>
     </div>
   )
 }
