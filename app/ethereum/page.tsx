@@ -23,10 +23,7 @@ const EthComponent: React.FC = () => {
   return (
     <div>
       <p>Window ethereum: {ethereum ? 'Ethereum found' : 'Ethereum not found'}</p>
-      <p>
-        Provider:{' '}
-        {JSON.stringify(ethereumContext.ethersProvider?.web3Provider?.provider)}
-      </p>
+      <p>Provider: {JSON.stringify(ethereumContext.ethersProvider?.web3Provider?.provider)}</p>
     </div>
   )
 }
