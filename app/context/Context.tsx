@@ -7,14 +7,14 @@ export interface EthersProvider {
   web3Provider: ethers.Provider | null
 }
 
-export interface EthereumContextType {
+export interface ContextType {
   ethersProvider: EthersProvider | null
 }
 
-export const defaultState: EthereumContextType = {
+export const defaultState: ContextType = {
   ethersProvider: { web3Provider: null },
 }
 
-const EthereumContext = createContext<EthereumContextType>(defaultState)
+const Context = createContext<ContextType>(defaultState)
 
-export default EthereumContext
+export default Context
