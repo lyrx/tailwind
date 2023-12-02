@@ -18,7 +18,7 @@ const LoginButton = () => {
       }
       setMounted(true)
     }
-  }, [])
+  }, [context])
 
   if (!mounted) {
     return null

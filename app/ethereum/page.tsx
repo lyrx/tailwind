@@ -8,6 +8,7 @@ const EthComponent: React.FC = () => {
   const [web3Provider, setWeb3Provider] = useState<ethers.Provider | null | undefined>(null)
   const [signer, setSigner] = useState<ethers.Signer | null | undefined>(null)
   const [address, setAddress] = useState<string | null | undefined>(null)
+  const [isInitialized, setIsInitialized] = useState<boolean>(false)
   const context = useContext(Context)
   useEffect(() => {
     const aprovider = context?.ethersProvider?.web3Provider
@@ -15,18 +16,25 @@ const EthComponent: React.FC = () => {
     // @ts-ignore
     aprovider?.getSigner().then((s) => {
       setSigner(s)
-      s.getAddress().then((a) => setAddress(a))
+      s.getAddress().then((a) => {
+        setAddress(a)
+        setIsInitialized(true)
+      })
     })
   }, [context?.ethersProvider?.web3Provider])
-  return (
+
+  const whenInitialized = () => (
     <div>
-      <p>
-        {typeof address !== 'undefined' && address != null
-          ? `Address: ${JSON.stringify(address)}`
-          : 'Getting Address'}
-      </p>
+      {' '}
+      <p>`address: {JSON.stringify(address)}`</p>
     </div>
   )
+  const whenNotInitialized = () => (
+    <div>
+      <p>'Initializing'</p>
+    </div>
+  )
+  return isInitialized ? whenInitialized() : whenNotInitialized()
 }
 
 export default EthComponent
