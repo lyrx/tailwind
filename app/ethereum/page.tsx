@@ -2,12 +2,14 @@
 
 import React, { useEffect, useState, useContext } from 'react'
 import Context from '../context/Context'
-import { ethers } from 'ethers'
+import { BigNumberish, ethers } from 'ethers'
 
 const EthComponent: React.FC = () => {
   const [web3Provider, setWeb3Provider] = useState<ethers.Provider | null | undefined>(null)
   const [signer, setSigner] = useState<ethers.Signer | null | undefined>(null)
   const [address, setAddress] = useState<string | null | undefined>(null)
+  const [balance, setBalance] = useState<BigNumberish>(0)
+  const [network,setNetwork] = useState<ethers.Network | null>(null)
   const [isInitialized, setIsInitialized] = useState<boolean>(false)
   const context = useContext(Context)
   useEffect(() => {
@@ -18,7 +20,13 @@ const EthComponent: React.FC = () => {
       setSigner(s)
       s.getAddress().then((a) => {
         setAddress(a)
-        setIsInitialized(true)
+        aprovider?.getBalance(a).then((b) => {
+          setBalance(b)
+          aprovider?.getNetwork().then((n) => {
+            setNetwork(n)
+            setIsInitialized(true)
+          })
+        })
       })
     })
   }, [context?.ethersProvider?.web3Provider])
@@ -26,7 +34,9 @@ const EthComponent: React.FC = () => {
   const whenInitialized = () => (
     <div>
       {' '}
-      <p>`address: {JSON.stringify(address)}`</p>
+      <p>
+        `Address: {JSON.stringify(address)}: {ethers.formatEther(balance)} ({network?.name})`
+      </p>
     </div>
   )
   const whenNotInitialized = () => (
