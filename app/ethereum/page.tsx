@@ -9,7 +9,7 @@ const EthComponent: React.FC = () => {
   const [signer, setSigner] = useState<ethers.Signer | null | undefined>(null)
   const [address, setAddress] = useState<string | null | undefined>(null)
   const [balance, setBalance] = useState<BigNumberish>(0)
-  const [network,setNetwork] = useState<ethers.Network | null>(null)
+  const [network, setNetwork] = useState<ethers.Network | null>(null)
   const [isInitialized, setIsInitialized] = useState<boolean>(false)
   const context = useContext(Context)
   useEffect(() => {
