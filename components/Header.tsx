@@ -42,7 +42,7 @@ const Header = () => {
               {link.title}
             </Link>
           ))}{' '}
-        <SearchButton /> <ThemeSwitch /> <LoginButton />
+        <SearchButton /> <ThemeSwitch />
         <MobileNav />
       </div>
     </header>
