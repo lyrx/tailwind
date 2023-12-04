@@ -4,7 +4,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import Context from '../../app/context/Context'
 import { BigNumberish, ethers } from 'ethers'
 
-const CurrentNetwork: React.FC = () => {
+const CurrentAddress: React.FC = () => {
   const context = useContext(Context)
   const [network, setNetwork] = useState<ethers.Network | null | undefined>(null)
   useEffect(() => {
@@ -14,4 +14,4 @@ const CurrentNetwork: React.FC = () => {
   return network ? network?.name : `No network`
 }
 
-export default CurrentNetwork
+export default CurrentAddress
