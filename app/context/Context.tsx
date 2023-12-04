@@ -4,7 +4,7 @@ import { createContext, Dispatch, SetStateAction } from 'react'
 import { ethers } from 'ethers'
 
 export interface EthersProvider {
-  web3Provider: ethers.Provider | null
+  web3Provider: ethers.BrowserProvider | null
 }
 
 export interface ContextType {

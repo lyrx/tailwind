@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import Context from '../context/Context'
 import CurrentNetwork from '@/components/ethereum/CurrentNetwork'
+import CurrentSignerAddress from '@/components/ethereum/CurrentSignerAddress'
 import { BigNumberish, ethers } from 'ethers'
 
 const EthComponent: React.FC = () => {
@@ -16,7 +17,6 @@ const EthComponent: React.FC = () => {
   useEffect(() => {
     const aprovider = context?.ethersProvider?.web3Provider
     setWeb3Provider(aprovider)
-    // @ts-ignore
     aprovider?.getSigner().then((s) => {
       setSigner(s)
       s.getAddress().then((a) => {
@@ -36,7 +36,7 @@ const EthComponent: React.FC = () => {
     <div>
       {' '}
       <p>
-        Address: {JSON.stringify(address)}: {ethers.formatEther(balance)} (<CurrentNetwork />)
+        Address: <CurrentSignerAddress />: {ethers.formatEther(balance)} (<CurrentNetwork />)
       </p>
     </div>
   )
