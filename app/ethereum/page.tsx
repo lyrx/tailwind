@@ -4,6 +4,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import Context from '../context/Context'
 import CurrentNetwork from '@/components/ethereum/CurrentNetwork'
 import CurrentSignerAddress from '@/components/ethereum/CurrentSignerAddress'
+import CurrentSignerBalance from '@/components/ethereum/CurrentSignerBalance'
 import { BigNumberish, ethers } from 'ethers'
 
 const EthComponent: React.FC = () => {
@@ -36,7 +37,7 @@ const EthComponent: React.FC = () => {
     <div>
       {' '}
       <p>
-        Address: <CurrentSignerAddress />: {ethers.formatEther(balance)} (<CurrentNetwork />)
+        Address: <CurrentSignerAddress />:  ETH <CurrentSignerBalance /> (<CurrentNetwork />)-Network
       </p>
     </div>
   )
