@@ -9,7 +9,7 @@ const siteMetadata = {
   siteUrl: 'https://www.alexanderweinmann.com/',
   siteRepo: 'https://github.com/lyrx/tailwind',
   siteLogo: '/static/images/avatar.png',
-  socialBanner: '/static/images/twitter-card.png',
+  socialBanner: '/static/images/avatar.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'enna@mailbox.org',
   github: 'https://github.com/lyrx',
