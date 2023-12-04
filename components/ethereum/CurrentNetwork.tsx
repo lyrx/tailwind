@@ -8,8 +8,7 @@ const CurrentNetwork: React.FC = () => {
   const context = useContext(Context)
   const [network, setNetwork] = useState<ethers.Network | null | undefined>(null)
   useEffect(() => {
-    const aprovider = context?.ethersProvider?.web3Provider
-    aprovider?.getNetwork().then((n) => setNetwork(n))
+    context?.ethersProvider?.web3Provider?.getNetwork().then((n) => setNetwork(n))
   }, [context?.ethersProvider?.web3Provider])
   return network ? network?.name : `No network`
 }
