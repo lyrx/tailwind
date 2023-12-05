@@ -1,6 +1,6 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: "Alexander's Page",
+  title: "Me on IT",
   author: 'Alexander Weinmann',
   headerTitle: 'Me On IT',
   description: 'On IT, Web3, AI and Us',
