@@ -10,7 +10,7 @@ const EthComponent: React.FC = () => (
     <article>
       <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
         <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
-          <h1>Header</h1>
+          <h1>Ethereum Network</h1>
           <table className="table-auto">
             <thead>
               <tr>
