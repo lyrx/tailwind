@@ -2,11 +2,12 @@ import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
-import CurrentSignerAddress from '@/components/ethereum/CurrentSignerAddress'
+import BlockNumberMainNet from '@/components/ethereum/BlockNumberMainNet'
 
 const MAX_DISPLAY = 5
 
 export default function Home({ posts }) {
+  const date = new Date()
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -83,7 +84,9 @@ export default function Home({ posts }) {
       )}
       {siteMetadata.newsletter?.provider && (
         <div className="flex items-center justify-center pt-4">
-          <span></span>
+          <span>
+            {date.toLocaleString()}, Ethereum Block: <BlockNumberMainNet />
+          </span>
         </div>
       )}
     </>
