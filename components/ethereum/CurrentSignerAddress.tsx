@@ -6,7 +6,7 @@ import { BigNumberish, ethers } from 'ethers'
 
 const CurrentSignerAddress: React.FC = () => {
   const context = useContext(Context)
-  const [address, setAddress] = useState<string>(`No address`)
+  const [address, setAddress] = useState<string>(``)
   useEffect(() => {
     context?.ethersProvider?.web3Provider
       ?.getSigner()
