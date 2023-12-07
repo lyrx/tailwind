@@ -14,4 +14,3 @@ const CurrentNetwork: React.FC = () => {
 }
 
 export default CurrentNetwork
-
