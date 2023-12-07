@@ -4,16 +4,14 @@ import React, { useEffect, useState, useContext } from 'react'
 import Context from '../../app/context/Context'
 import { BigNumberish, ethers } from 'ethers'
 
-const BalanceMainNet: React.FC = (address: string) => {
+const BalanceOf: React.FC<{ address: string }> = ({ address }) => {
   const context = useContext(Context)
   const [balance, setBalance] = useState<BigNumberish>(0)
 
   useEffect(() => {
     // Define a function to fetch the block number
     const fetchBalance = () => {
-      context?.ethersProvider?.defaultMainNetProvider
-        ?.getBalance(address)
-        .then((n) => setBalance(n))
+      context?.ethersProvider?.web3Provider?.getBalance(address).then((n) => setBalance(n))
     }
 
     // Fetch the block number immediately on component mount
@@ -24,9 +22,9 @@ const BalanceMainNet: React.FC = (address: string) => {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval)
-  }, [context?.ethersProvider?.defaultMainNetProvider])
+  }, [context?.ethersProvider?.web3Provider])
 
-  return ethers.formatEther(balance)
+  return <span>{ethers.formatEther(balance)}</span>
 }
 
-export default BalanceMainNet
+export default BalanceOf

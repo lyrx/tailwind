@@ -12,7 +12,7 @@ const CurrentSignerAddress: React.FC = () => {
       ?.getSigner()
       .then((s) => s.getAddress().then((a) => setAddress(a)))
   }, [context?.ethersProvider?.web3Provider])
-  return address
+  return <span>{address}</span>
 }
 
 export default CurrentSignerAddress

@@ -3,7 +3,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import Context from '../../app/context/Context'
 import { BigNumberish, ethers } from 'ethers'
-import BalanceMainNet from '@/components/ethereum/BalanceMainNet'
 
 const CurrentSignerAddress: React.FC = () => {
   const context = useContext(Context)
@@ -24,7 +23,7 @@ const CurrentSignerAddress: React.FC = () => {
     })
     // Clean up the interval when the component unmounts
   }, [context.ethersProvider?.web3Provider])
-  return balance
+  return <span>{balance}</span>
 }
 
 export default CurrentSignerAddress
