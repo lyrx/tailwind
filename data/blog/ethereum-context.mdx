@@ -1,0 +1,41 @@
+---
+title: 'MetaMask: Context und React'
+date: '2023-12-09'
+lastmod: '2023-12-09'
+tags: ['Web3']
+draft: true
+summary: 'Wie man MetaMask in einer REACT-Anwendung verwendet'
+images: []
+authors: ['default']
+---
+
+Einfach nur einen `Provider` initialisieren, wie ich das in meinem
+[letzten Post](ethereum-provider)
+beschrieben habe, genügt nicht. Es soll ja schliesslich darum gehen,
+dass man den Nutzer in die Lage versetzt, auf ganz unterschiedliche
+Arten und Weisen über die eigene Website mit dem Ethereum-Netzwerk zu interagieren.
+
+Das ist nicht ganz einfach. Wir wollen das Problem am Beispiel meiner
+hier im Blog verwendeten **Next.JS**-Anwendung erläutern. In einem solchen
+Fall ist der Blog im Grunde genommen, eine Software-Anwendung, also ein Programm.
+Die Software kann beliebig verändert und erweitert werden. Genau das tun wir, wenn wir
+kein Verbindung zu **MetaMask** hier einbauen.
+
+Wie immer in der Software-Entwicklung birgt jede Erweiterung die Gefahr in sich,
+dass die Anwendung zusehends komplizierter wird -- und am Ende ohne grossen Zeitaufwand
+nicht mehr wartbar ist, und schon gar nicht mehr erweiterbar.
+
+Das dahinter liegende Problem ist eigentlich immer die **Kapselung**. Das bedeutet letztendlich,
+dass mit der falschen Vorgehensweise sehr schnell jede Komponente von der anderen abhängig wird.
+
+Dieses Problem wird im Allgemeinen früh erkannt. Und dann wird gegengesteuert. Teile des Programms
+werden so konstruiert, dass sie nur noch über definierte Schnittstellen mit den anderen Teilen des
+Programms interagieren können. **Kapselung** eben!
+
+Was aber tun, wenn es übergreifende Informationen gibt, die für verschiedene Komponenten der Software
+gleichzeitig zur Verfügung stehen müssen?
+
+Dann wird recht schnell die mühsam durchdachte und eingeführte
+Kapselung zu einem Störfaktor, der zumindest teilweise wieder rückabgewickelt werden muss. Konsequenz: Die
+Software -- eben erst sorgfältig in sauber definierte Komponenten aufgeteilt -- erhält nachträglich
+Erweiterungen, durch welche die existierende
