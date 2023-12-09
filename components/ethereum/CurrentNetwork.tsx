@@ -10,7 +10,7 @@ const CurrentNetwork: React.FC = () => {
   useEffect(() => {
     context?.ethersProvider?.web3Provider?.getNetwork().then((n) => setNetwork(n))
   }, [context?.ethersProvider?.web3Provider])
-  return network ? <span>{network?.name}</span> : <span>`No network`</span>
+  return network ? <span>{network?.name}</span> : <span>`--`</span>
 }
 
 export default CurrentNetwork

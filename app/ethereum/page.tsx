@@ -3,16 +3,33 @@
 import CurrentNetwork from '@/components/ethereum/CurrentNetwork'
 import CurrentSignerAddress from '@/components/ethereum/CurrentSignerAddress'
 import CurrentSignerBalance from '@/components/ethereum/CurrentSignerBalance'
+import MaybeNoBrowserProvider from '@/components/ethereum/MaybeNoBrowserProvider'
 import SectionContainer from '@/components/SectionContainer'
 import NameOf from '@/components/ethereum/ERC20/NameOf'
 import SignerBalance from '@/components/ethereum/ERC20/SignerBalance'
+import BlockNumberMainNet from '@/components/ethereum/BlockNumberMainNet'
 // @ts-ignore
 const EthComponent: React.FC = () => (
   <SectionContainer>
     <article>
       <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
         <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
-          <h1>Ethereum Network</h1>
+          <h1>Ethereum Network: Overview</h1>
+          <p className={'text-primary-500'}>
+            <MaybeNoBrowserProvider />
+          </p>
+          <h2>Basic data</h2>
+          <table className="table-auto">
+            <tbody>
+              <tr>
+                <td>Mainnet block number:</td>
+                <td>
+                  <BlockNumberMainNet />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h2>Signer</h2>
           <table className="table-auto">
             <thead>
               <tr>
@@ -35,12 +52,11 @@ const EthComponent: React.FC = () => (
               </tr>
             </tbody>
           </table>
-          <h1>ERC20</h1>
           <table className="table-auto">
             <thead>
               <tr>
-                <th>Token</th>
-                <th>SignerBalance</th>
+                <th>ERC20 Token</th>
+                <th>Signer Balance</th>
               </tr>
             </thead>
             <tbody>
