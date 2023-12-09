@@ -1,23 +1,71 @@
 ---
 title: 'MetaMask und einiges mehr'
-date: '2023-12-08'
-lastmod: '2023-12-08'
+date: '2023-12-09'
+lastmod: '2023-12-09'
 tags: ['Web3']
-draft: true
-summary: 'Integration für MetaMask in diesen Blog'
+draft: false
+summary: 'Wie man MetaMask in seine eigene Webseite integrieren kann.'
 images: []
 authors: ['default']
 ---
 
+![](/static/images/metamaskethers.png)
 
-MetaMask ist nur der Anfang!
 
+Ich hatte die Idee,
+[MetaMask](https://docs.metamask.io/)
+in diesen Blog zu integrieren, und
+das
+ist dabei
+[herausgekommen](/ethereum)
+...
+
+Ich schildere jetzt kurz und knapp, wie ich dabei
+vorgegangen bin.
+
+Ziel war es, die JavaScript-Bibliothek
+[Ethers v6](https://docs.ethers.org/v6/)
+verwenden zu können, um darüber mit dem Ethereum-Netzwerk zu kommunizieren.
+
+Also ging es darum, **MetaMask**
+als sogenannten
+[BrowserProvider](https://docs.ethers.org/v6/api/providers/#BrowserProvider)
+einzubinden, denn der ist das *Schlüsselobjekt*, über welches
+**Ethers** mit dem Ethereum-Netzwerk verbunden wird.
+
+Und wie erhalte ich nun einen solchen
+[BrowserProvider](https://docs.ethers.org/v6/api/providers/#BrowserProvider)?
+
+Zunächst injiziert sich **MetaMask** über eine Referenz in das
+[DOM](https://www.w3schools.com/whatis/whatis_htmldom.asp):
+`window.ethereum`. Allerdings kann dieses *Proxy-Objekt* auch von anderen
+Browser-Erweiterungen verwendet werden, z.B. vom
+[Brave-Wallet](https://brave.com/de/wallet/) des
+[Brave-Browsers](https://brave.com).
+
+Nun da wir wissen, wie wir über *JavaScript* auf **MetaMask** zugreifen können,
+geht es nur noch darum, dije Brücke zu
+[Ethers](https://docs.ethers.org)
+zu schlagen. Das geht ganz einfach so:
 
 ```js
-import CurrentNetwork from '@/components/ethereum/CurrentNetwork'
+provider =  new ethers.BrowserProvider(window.ethereum)
 ```
 
+Und wenn `window.ethereum` nicht gesetzt ist, setzen wir:
 
-[ccxt/ccxt](https://github.com/ccxt/ccxt)
+```js
+provider =  new ethers.getDefaultProvider('mainnet')
+```
 
-Here we goooo:
+Der `DefaultProvider` ist eine `read-only`-Implementierung dieser Schnittstelle,
+die nur dazu dient, einige wenige Lesezugriffe auf das Ethereum-Netzwerk zu
+ermöglichen, wenn hierfür kein Plugin im Browser zur Verfügung steht.
+
+So weit so gut -- so einfach! Interessant wird es erst, wenn wir **Ethers**, und damit
+auch **MetaMask** auf einer echten Webseite einsetzen wollen. Das erfahrt ihr aber
+erst im nächsten Post.
+
+
+
+
