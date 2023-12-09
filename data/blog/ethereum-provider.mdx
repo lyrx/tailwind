@@ -1,71 +1,47 @@
 ---
-title: 'MetaMask und einiges mehr'
+title: 'MetaMask and More'
 date: '2023-12-09'
 lastmod: '2023-12-09'
 tags: ['Web3']
 draft: false
-summary: 'Wie man MetaMask in seine eigene Webseite integrieren kann.'
+summary: 'How to integrate MetaMask into your own website.'
 images: []
 authors: ['default']
 ---
 
 ![](/static/images/metamaskethers.png)
 
+I had the idea to integrate [MetaMask](https://docs.metamask.io/) into this blog,
+and this is what [came out of it](/ethereum) ...
 
-Ich hatte die Idee,
-[MetaMask](https://docs.metamask.io/)
-in diesen Blog zu integrieren, und
-das
-ist dabei
-[herausgekommen](/ethereum)
-...
+Now, I'll briefly and concisely describe how I went about it.
 
-Ich schildere jetzt kurz und knapp, wie ich dabei
-vorgegangen bin.
+The goal was to use the JavaScript library [Ethers v6](https://docs.ethers.org/v6/) to communicate with the Ethereum network.
 
-Ziel war es, die JavaScript-Bibliothek
-[Ethers v6](https://docs.ethers.org/v6/)
-verwenden zu können, um darüber mit dem Ethereum-Netzwerk zu kommunizieren.
+So, it was about integrating **MetaMask** as a so-called [BrowserProvider](https://docs.ethers.org/v6/api/providers/#BrowserProvider),
+as this is the *key object* through which **Ethers** connects to the Ethereum network.
 
-Also ging es darum, **MetaMask**
-als sogenannten
-[BrowserProvider](https://docs.ethers.org/v6/api/providers/#BrowserProvider)
-einzubinden, denn der ist das *Schlüsselobjekt*, über welches
-**Ethers** mit dem Ethereum-Netzwerk verbunden wird.
+And how do I now get such a [BrowserProvider](https://docs.ethers.org/v6/api/providers/#BrowserProvider)?
 
-Und wie erhalte ich nun einen solchen
-[BrowserProvider](https://docs.ethers.org/v6/api/providers/#BrowserProvider)?
+First, **MetaMask** injects itself into the [DOM](https://www.w3schools.com/whatis/whatis_htmldom.asp) through
+a reference: `window.ethereum`. However, this *proxy object* can also be used by other browser
+extensions, e.g., the [Brave Wallet](https://brave.com/de/wallet/) of the [Brave Browser](https://brave.com).
 
-Zunächst injiziert sich **MetaMask** über eine Referenz in das
-[DOM](https://www.w3schools.com/whatis/whatis_htmldom.asp):
-`window.ethereum`. Allerdings kann dieses *Proxy-Objekt* auch von anderen
-Browser-Erweiterungen verwendet werden, z.B. vom
-[Brave-Wallet](https://brave.com/de/wallet/) des
-[Brave-Browsers](https://brave.com).
-
-Nun da wir wissen, wie wir über *JavaScript* auf **MetaMask** zugreifen können,
-geht es nur noch darum, dije Brücke zu
-[Ethers](https://docs.ethers.org)
-zu schlagen. Das geht ganz einfach so:
+Now that we know how to access **MetaMask** via *JavaScript*, it's just a matter
+of building the bridge to [Ethers](https://docs.ethers.org). It's as simple as this:
 
 ```js
-provider =  new ethers.BrowserProvider(window.ethereum)
+provider = new ethers.BrowserProvider(window.ethereum)
 ```
 
-Und wenn `window.ethereum` nicht gesetzt ist, setzen wir:
+And if `window.ethereum` is not set, we set:
 
 ```js
-provider =  new ethers.getDefaultProvider('mainnet')
+provider = new ethers.getDefaultProvider('mainnet')
 ```
 
-Der `DefaultProvider` ist eine `read-only`-Implementierung dieser Schnittstelle,
-die nur dazu dient, einige wenige Lesezugriffe auf das Ethereum-Netzwerk zu
-ermöglichen, wenn hierfür kein Plugin im Browser zur Verfügung steht.
+The `DefaultProvider` is a `read-only` implementation of this interface, only intended to enable
+a few read accesses to the Ethereum network when no plugin is available in the browser.
 
-So weit so gut -- so einfach! Interessant wird es erst, wenn wir **Ethers**, und damit
-auch **MetaMask** auf einer echten Webseite einsetzen wollen. Das erfahrt ihr aber
-erst im nächsten Post.
-
-
-
-
+So far so good -- so simple! It gets interesting when we want to use **Ethers**, and thus **MetaMask**,
+on a real website. But you'll learn about that in the next post.
