@@ -1,19 +1,18 @@
 'use client'
 
-import { createContext, Dispatch, SetStateAction } from 'react'
+import { createContext } from 'react'
 import { ethers } from 'ethers'
+import {
+  BlockOrNull,
+  BlockSetterOrNull,
+  BrowserProviderOrNull,
+  BrowserProviderSetterOrNull,
+  EthersContextType,
+  ProviderOrNull,
+  ProviderSetterOrNull,
+} from '@/components/ethereum/EthersDerivedTypes'
 
-export interface EthersProvider {
-  web3Provider: ethers.BrowserProvider | null
-  defaultMainNetProvider: ethers.Provider
-}
-
-export interface ContextType {
-  ethersProvider: EthersProvider | null
-}
-
-export function createDefaultState() {
-  const ad = ethers.getDefaultProvider('mainnet')
+function maybeAddWalletListener() {
   // @ts-ignore
   if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
     // @ts-ignore
@@ -29,23 +28,31 @@ export function createDefaultState() {
       // @ts-ignore
       window.ethereum._listenerAdded = true
     }
-
-    return {
-      ethersProvider: {
-        // @ts-ignore
-        web3Provider: new ethers.BrowserProvider(window.ethereum),
-        defaultMainNetProvider: ad,
-      },
-    }
-  } else
-    return {
-      ethersProvider: {
-        web3Provider: null,
-        defaultMainNetProvider: ad,
-      },
-    }
+  }
+}
+export function createEmptyState(
+  aLastBlock: BlockOrNull,
+  aSetLastBlock: BlockSetterOrNull,
+  aDefaultProvider: ProviderOrNull,
+  aSetDefaultProvider: ProviderSetterOrNull,
+  aWeb3Provider: BrowserProviderOrNull,
+  aSetWeb3Provider: BrowserProviderSetterOrNull
+) {
+  maybeAddWalletListener()
+  return {
+    ethersProvider: {
+      web3Provider: aWeb3Provider,
+      web3ProviderSetterOrNull: aSetWeb3Provider,
+      lastBlock: aLastBlock,
+      lastBlockSetterOrNull: aSetLastBlock,
+      defaultMainNetProvider: aDefaultProvider,
+      defaultMainNetProviderSetterOrNull: aSetDefaultProvider,
+    },
+  }
 }
 
-const Context = createContext<ContextType>(createDefaultState())
+const Context = createContext<EthersContextType>(
+  createEmptyState(null, null, null, null, null, null)
+)
 
 export default Context

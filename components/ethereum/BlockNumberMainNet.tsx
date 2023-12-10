@@ -11,9 +11,7 @@ const BlockNumberMainNet: React.FC = () => {
   useEffect(() => {
     // Define a function to fetch the block number
     const fetchBlockNumber = () => {
-      context?.ethersProvider?.defaultMainNetProvider
-        ?.getBlockNumber()
-        .then((n) => setBlockNumber(n))
+      context?.ethersProvider?.web3Provider?.getBlockNumber().then((n) => setBlockNumber(n))
     }
 
     // Fetch the block number immediately on component mount
@@ -24,7 +22,7 @@ const BlockNumberMainNet: React.FC = () => {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval)
-  }, [context?.ethersProvider?.defaultMainNetProvider])
+  }, [context?.ethersProvider?.web3Provider])
 
   return blockNumber
 }

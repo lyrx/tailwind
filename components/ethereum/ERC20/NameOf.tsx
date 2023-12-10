@@ -15,7 +15,7 @@ const NameOf: React.FC<{ contractAddress: string }> = ({ contractAddress }) => {
           const tokenContract = ERC20.getERC20TokenContract(
             contractAddress,
             // @ts-ignore
-            context.ethersProvider.defaultMainNetProvider
+            context.ethersProvider?.web3Provider
           )
           tokenContract.name().then((n) => setName(n))
         }
