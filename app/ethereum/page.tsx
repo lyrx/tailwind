@@ -13,6 +13,7 @@ import React, { useEffect, useContext, useState } from 'react'
 import Context from '../context/Context'
 import ContextProvider from '../context/ContextProvider'
 import { BlockOrNull, BlockSetterOrNull } from '@/components/ethereum/EthersDerivedTypes'
+import Watch from '@/components/ethereum/Watch'
 // @ts-ignore
 const EthComponent: React.FC = () => {
   const context = useContext(Context)
@@ -28,7 +29,9 @@ const EthComponent: React.FC = () => {
               <p className={'text-primary-500'}>
                 <MaybeNoBrowserProvider />
               </p>
-              <h2>Basic data</h2>
+              <h2>
+                Current Net: '<CurrentNetwork />'
+              </h2>
               <table className="table-auto">
                 <tbody>
                   <tr>
@@ -43,15 +46,20 @@ const EthComponent: React.FC = () => {
                       <LastBlockTimestamp />
                     </td>
                   </tr>
+                  <tr>
+                    <td>Current Time:</td>
+                    <td>
+                      <Watch />
+                    </td>
+                  </tr>
                 </tbody>
               </table>
               <h2>Signer</h2>
               <table className="table-auto">
                 <thead>
                   <tr>
-                    <th>Signer Address</th>
-                    <th>Signer Balance (ETH)</th>
-                    <th>Network</th>
+                    <th>Address</th>
+                    <th>Balance (ETH)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -61,9 +69,6 @@ const EthComponent: React.FC = () => {
                     </td>
                     <td>
                       <CurrentSignerBalance />
-                    </td>
-                    <td>
-                      <CurrentNetwork />
                     </td>
                   </tr>
                 </tbody>
