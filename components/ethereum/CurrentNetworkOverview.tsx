@@ -1,14 +1,21 @@
 'use client'
 
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import CurrentNetwork from '@/components/ethereum/CurrentNetwork'
 import LastBlockNumber from '@/components/ethereum/LastBlockNumber'
 import LastBlockTimestamp from '@/components/ethereum/LastBlockTimestamp'
 import Watch from '@/components/ethereum/Watch'
+import Context from '../../app/context/Context'
 
 const CurrentNetworkOverview: React.FC = () => {
-  return (
+  const context = useContext(Context)
+  const [hasNetwork, setHasNetwork] = useState<boolean>(false)
+  useEffect(() => {
+    context?.ethersProvider?.web3Provider?.getNetwork().then((n) => setHasNetwork(true))
+  }, [context?.ethersProvider?.web3Provider])
+
+  return hasNetwork ? (
     <>
       <h2>
         Current network: '<CurrentNetwork />'
@@ -36,7 +43,7 @@ const CurrentNetworkOverview: React.FC = () => {
         </tbody>
       </table>
     </>
-  )
+  ) : null
 }
 
 export default CurrentNetworkOverview
