@@ -20,7 +20,11 @@ const MaybeNoBrowserProvider: React.FC = () => {
       setErrorMessage('Connection to Ethereum Network not possible.')
     }
   }, [context?.ethersProvider?.web3Provider])
-  return <span>{errorMessage}</span>
+  return (
+    <p className={'text-primary-500'}>
+      <span>{errorMessage}</span>
+    </p>
+  )
 }
 
 export default MaybeNoBrowserProvider

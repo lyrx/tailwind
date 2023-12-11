@@ -30,9 +30,7 @@ const EthComponent: React.FC = () => {
           <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
             <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
               <h1>Ethereum Network: Overview</h1>
-              <p className={'text-primary-500'}>
-                <MaybeNoBrowserProvider />
-              </p>
+              <MaybeNoBrowserProvider />
               <CurrentNetworkOverview /> <CurrentSignerOverview /> <Tokens />
             </div>
           </div>
