@@ -16,6 +16,7 @@ import { BlockOrNull, BlockSetterOrNull } from '@/components/ethereum/EthersDeri
 import Watch from '@/components/ethereum/Watch'
 import LastBlockNumber from '@/components/ethereum/LastBlockNumber'
 import Tokens from '@/components/ethereum/ERC20/Tokens'
+import CurrentNetworkOverview from '@/components/ethereum/ERC20/CurrentNetworkOverview'
 // @ts-ignore
 const EthComponent: React.FC = () => {
   const context = useContext(Context)
@@ -31,32 +32,7 @@ const EthComponent: React.FC = () => {
               <p className={'text-primary-500'}>
                 <MaybeNoBrowserProvider />
               </p>
-              <h2>
-                Current network: '<CurrentNetwork />'
-              </h2>
-              <table className="table-auto">
-                <tbody>
-                  <tr>
-                    <td>Last Block Number:</td>
-                    <td>
-                      <LastBlockNumber />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Last block timestamp:</td>
-                    <td>
-                      <LastBlockTimestamp />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Current Time:</td>
-                    <td>
-                      <Watch />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
+              <CurrentNetworkOverview />
               <h2>Signer</h2>
               <table className="table-auto">
                 <thead>
