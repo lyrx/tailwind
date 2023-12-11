@@ -24,26 +24,29 @@ const Tokens: React.FC = () => {
     })
   }, [context?.ethersProvider?.web3Provider])
   return tokens.length > 0 ? (
-    <table className="table-auto">
-      <thead>
-        <tr>
-          <th>ERC20 Token</th>
-          <th>Signer Balance</th>
-        </tr>
-      </thead>
-      <tbody>
-        {tokens.map((a) => (
-          <tr key={a}>
-            <td>
-              <NameOf contractAddress={a} />
-            </td>
-            <td>
-              <SignerBalance contractAddress={a} />
-            </td>
+    <>
+      <h2>ERC20 Tokens</h2>
+      <table className="table-auto">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Signer Balance</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {tokens.map((a) => (
+            <tr key={a}>
+              <td>
+                <NameOf contractAddress={a} />
+              </td>
+              <td>
+                <SignerBalance contractAddress={a} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   ) : null
 }
 
