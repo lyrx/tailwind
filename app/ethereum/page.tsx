@@ -14,6 +14,7 @@ import Context from '../context/Context'
 import ContextProvider from '../context/ContextProvider'
 import { BlockOrNull, BlockSetterOrNull } from '@/components/ethereum/EthersDerivedTypes'
 import Watch from '@/components/ethereum/Watch'
+import LastBlockNumber from '@/components/ethereum/LastBlockNumber'
 // @ts-ignore
 const EthComponent: React.FC = () => {
   const context = useContext(Context)
@@ -35,9 +36,9 @@ const EthComponent: React.FC = () => {
               <table className="table-auto">
                 <tbody>
                   <tr>
-                    <td>Mainnet block-number:</td>
+                    <td>Last Block Number:</td>
                     <td>
-                      <BlockNumberMainNet />
+                      <LastBlockNumber />
                     </td>
                   </tr>
                   <tr>
