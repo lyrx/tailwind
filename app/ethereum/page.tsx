@@ -17,6 +17,7 @@ import Watch from '@/components/ethereum/Watch'
 import LastBlockNumber from '@/components/ethereum/LastBlockNumber'
 import Tokens from '@/components/ethereum/ERC20/Tokens'
 import CurrentNetworkOverview from '@/components/ethereum/ERC20/CurrentNetworkOverview'
+import CurrentSignerOverview from '@/components/ethereum/ERC20/CurrentSignerOverview'
 // @ts-ignore
 const EthComponent: React.FC = () => {
   const context = useContext(Context)
@@ -32,27 +33,7 @@ const EthComponent: React.FC = () => {
               <p className={'text-primary-500'}>
                 <MaybeNoBrowserProvider />
               </p>
-              <CurrentNetworkOverview />
-              <h2>Signer</h2>
-              <table className="table-auto">
-                <thead>
-                  <tr>
-                    <th>Address</th>
-                    <th>Balance (ETH)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <CurrentSignerAddress />
-                    </td>
-                    <td>
-                      <CurrentSignerBalance />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <Tokens />
+              <CurrentNetworkOverview /> <CurrentSignerOverview /> <Tokens />
             </div>
           </div>
         </article>
