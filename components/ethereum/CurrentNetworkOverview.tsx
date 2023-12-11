@@ -12,7 +12,9 @@ const CurrentNetworkOverview: React.FC = () => {
   const context = useContext(Context)
   const [hasNetwork, setHasNetwork] = useState<boolean>(false)
   useEffect(() => {
-    context?.ethersProvider?.web3Provider?.getNetwork().then((n) => setHasNetwork(true))
+    context?.ethersProvider?.web3Provider
+      ?.getNetwork()
+      .then((n) => setHasNetwork(n !== null && n !== undefined))
   }, [context?.ethersProvider?.web3Provider])
 
   return hasNetwork ? (
