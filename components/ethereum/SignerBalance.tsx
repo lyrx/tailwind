@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useEffect, useState, useContext } from 'react'
-import Context from '../../../app/context/Context'
-import ERC20 from './ERC20'
+import Context from '../../app/context/Context'
+import ERC20 from './ERC20/ERC20'
 import { ethers } from 'ethers'
 
 const SignerBalance: React.FC<{ contractAddress: string }> = ({ contractAddress }) => {

@@ -6,7 +6,7 @@ import CurrentSignerBalance from '@/components/ethereum/CurrentSignerBalance'
 import MaybeNoBrowserProvider from '@/components/ethereum/MaybeNoBrowserProvider'
 import SectionContainer from '@/components/SectionContainer'
 import NameOf from '@/components/ethereum/ERC20/NameOf'
-import SignerBalance from '@/components/ethereum/ERC20/SignerBalance'
+import SignerBalance from '@/components/ethereum/SignerBalance'
 import BlockNumberMainNet from '@/components/ethereum/BlockNumberMainNet'
 import LastBlockTimestamp from '@/components/ethereum/LastBlockTimestamp'
 import React, { useEffect, useContext, useState } from 'react'
@@ -16,8 +16,8 @@ import { BlockOrNull, BlockSetterOrNull } from '@/components/ethereum/EthersDeri
 import Watch from '@/components/ethereum/Watch'
 import LastBlockNumber from '@/components/ethereum/LastBlockNumber'
 import Tokens from '@/components/ethereum/ERC20/Tokens'
-import CurrentNetworkOverview from '@/components/ethereum/ERC20/CurrentNetworkOverview'
-import CurrentSignerOverview from '@/components/ethereum/ERC20/CurrentSignerOverview'
+import CurrentNetworkOverview from '@/components/ethereum/CurrentNetworkOverview'
+import CurrentSignerOverview from '@/components/ethereum/CurrentSignerOverview'
 // @ts-ignore
 const EthComponent: React.FC = () => {
   const context = useContext(Context)

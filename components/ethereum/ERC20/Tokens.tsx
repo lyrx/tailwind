@@ -2,10 +2,8 @@
 
 import React, { useEffect, useState, useContext } from 'react'
 import Context from '../../../app/context/Context'
-import ERC20 from './ERC20'
-import { ethers } from 'ethers'
 import NameOf from '@/components/ethereum/ERC20/NameOf'
-import SignerBalance from '@/components/ethereum/ERC20/SignerBalance'
+import SignerBalance from '@/components/ethereum/SignerBalance'
 
 const Tokens: React.FC = () => {
   const context = useContext(Context)
