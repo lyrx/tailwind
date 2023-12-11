@@ -32,7 +32,7 @@ const EthComponent: React.FC = () => {
                 <MaybeNoBrowserProvider />
               </p>
               <h2>
-                Current Net: '<CurrentNetwork />'
+                Current network: '<CurrentNetwork />'
               </h2>
               <table className="table-auto">
                 <tbody>
@@ -56,6 +56,7 @@ const EthComponent: React.FC = () => {
                   </tr>
                 </tbody>
               </table>
+
               <h2>Signer</h2>
               <table className="table-auto">
                 <thead>
@@ -75,7 +76,7 @@ const EthComponent: React.FC = () => {
                   </tr>
                 </tbody>
               </table>
-            <Tokens  />
+              <Tokens />
             </div>
           </div>
         </article>

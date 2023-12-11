@@ -14,7 +14,7 @@ const MaybeNoBrowserProvider: React.FC = () => {
     } else if (context?.ethersProvider?.defaultMainNetProvider) {
       setErrorMessage(
         'Connection to Ethereum Network limited, no Browser Plugin found. ' +
-          'There is still a limited read-only connectivity to the Ethereum Main-Network.'
+          'This page will be empty.'
       )
     } else {
       setErrorMessage('Connection to Ethereum Network not possible.')
