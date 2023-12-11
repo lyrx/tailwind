@@ -20,6 +20,10 @@ const Tokens: React.FC = () => {
           '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984',
           '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE',
         ])
+      } else if (netWorkName === 'matic') {
+        setTokens([
+          //    '0xDdC34e3745ADB986a42392cEBFA2C24F72E24D4a'
+        ])
       }
     })
   }, [context?.ethersProvider?.web3Provider])
