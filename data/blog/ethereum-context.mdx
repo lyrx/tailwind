@@ -27,7 +27,7 @@ zugreifen können.
 
 Ich habe den Kontext für diesen Anwendungsfall folgendermassen definiert:
 
-```jsx
+```tsx
 
 const Context = createContext<EthersContextType>({
   ethersProvider: {
@@ -41,6 +41,42 @@ const Context = createContext<EthersContextType>({
 
 ```
 
+Weil hier Typescript verwendet wird  (`<EthersContextType>`), ist es möglich, den Kontext
+später schnell zu erweitern und dabei von der **Typsicherheit** von Typescript zu profitieren.
+
+Wo der Ethereum-Kontext benötigt wird, kann er nun schnell eingebunden werden, wie z.B. in dieser
+Komponente:
+```tsx
+'use client'
+
+import React, { useEffect, useState, useContext } from 'react'
+import Context from '../../app/context/Context'
+import { ethers } from 'ethers'
+
+const CurrentNetwork: React.FC = () => {
+  const context = useContext(Context)
+  const [network, setNetwork] = useState<ethers.Network | null | undefined>(null)
+  useEffect(() => {
+    context?.ethersProvider?.web3Provider?.getNetwork().then((n) => setNetwork(n))
+  }, [context?.ethersProvider?.web3Provider])
+  return network ? <span>{network?.name}</span> : <span>`--`</span>
+}
+
+export default CurrentNetwork
+```
+
+Das ist ein dicht gepacktes Stück Code, aber es profitiert von der Kompaktheit, die
+mit **TypeScript** möglich ist. Wenn die **Kontext-API** nicht verwendet würde,
+dann würde das an dieser Stelle noch viel wilder und komplizierter aussehen. Mit
+ein wenig Grundwissen über React bleibt der Code lesbar.
+
+Wer mehr darüber erfahren möchte, der kann gerne
+[hier](https://github.com/lyrx/tailwind/blob/main/app/context/ContextProvider.tsx)
+nachschauen.
+
+Es bleibt eigentlich nur zu bemerken, dass alles möglich ist, wenn man
+Ethereum und React verheiraten will. Man muss nur wissen, wie es geht ...
+
 [^1]: Wie immer in der Software-Entwicklung birgt jede Erweiterung die Gefahr in sich,
 dass die Anwendung zusehends komplizierter wird. **Prop drilling** ist eines
 von vielen Beispiel dafür.
@@ -49,4 +85,6 @@ Was also tun? -- Der
 möglicher Lösungsansatz dafür. Für React gibt es auch noch viele weitere Context-APIs,
 die allerdings als externe Komponenten eingebunden werden müssen. Der React-Context
 hat den Vorteil, dass er schon mit dazu gehört.
+
+
 
