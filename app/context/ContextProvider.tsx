@@ -15,9 +15,7 @@ interface Props {
 
 const ContextProvider: React.FC<Props> = ({ children }) => {
   const [lastBlock, setLastBlock]: [BlockOrNull, BlockSetterOrNull] = useState<BlockOrNull>(null)
-  const [defaultProvider, setDefaultProvider] = useState<ProviderOrNull>(
-    ethers.getDefaultProvider('mainnet')
-  )
+
   const [web3Provider, setWeb3Provider] = useState<BrowserProviderOrNull>(
     // @ts-ignore
     typeof window !== 'undefined' && typeof window.ethereum !== 'undefined'
@@ -45,8 +43,7 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
       value={createEmptyState(
         lastBlock,
         setLastBlock,
-        defaultProvider,
-        setDefaultProvider,
+        ethers.getDefaultProvider('mainnet'),
         web3Provider,
         setWeb3Provider
       )}

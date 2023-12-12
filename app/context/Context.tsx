@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext } from 'react'
-import { ethers } from 'ethers'
 import {
   BlockOrNull,
   BlockSetterOrNull,
@@ -9,7 +8,6 @@ import {
   BrowserProviderSetterOrNull,
   EthersContextType,
   ProviderOrNull,
-  ProviderSetterOrNull,
 } from '@/components/ethereum/EthersDerivedTypes'
 
 function maybeAddWalletListener() {
@@ -34,7 +32,6 @@ export function createEmptyState(
   aLastBlock: BlockOrNull,
   aSetLastBlock: BlockSetterOrNull,
   aDefaultProvider: ProviderOrNull,
-  aSetDefaultProvider: ProviderSetterOrNull,
   aWeb3Provider: BrowserProviderOrNull,
   aSetWeb3Provider: BrowserProviderSetterOrNull
 ) {
@@ -46,13 +43,10 @@ export function createEmptyState(
       lastBlock: aLastBlock,
       lastBlockSetterOrNull: aSetLastBlock,
       defaultMainNetProvider: aDefaultProvider,
-      defaultMainNetProviderSetterOrNull: aSetDefaultProvider,
     },
   }
 }
 
-const Context = createContext<EthersContextType>(
-  createEmptyState(null, null, null, null, null, null)
-)
+const Context = createContext<EthersContextType>(createEmptyState(null, null, null, null, null))
 
 export default Context

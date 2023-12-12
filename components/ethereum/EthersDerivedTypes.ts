@@ -9,10 +9,6 @@ export type BrowserProviderSetter = (
 ) => void
 export type BrowserProviderSetterOrNull = BrowserProviderSetter | null | undefined
 export type ProviderOrNull = Provider | null | undefined
-export type ProviderSetter = (
-  value: ((prevState: ProviderOrNull) => ProviderOrNull) | Provider | null | undefined
-) => void
-export type ProviderSetterOrNull = ProviderSetter | null | undefined
 
 export interface EthersProvider {
   web3Provider: BrowserProviderOrNull
@@ -20,7 +16,6 @@ export interface EthersProvider {
   lastBlock: BlockOrNull
   lastBlockSetterOrNull: BlockSetterOrNull
   defaultMainNetProvider: ProviderOrNull
-  defaultMainNetProviderSetterOrNull: ProviderSetterOrNull
 }
 export type EthersProviderOrNull = EthersProvider | null | undefined
 
