@@ -29,7 +29,7 @@ const EthComponent: React.FC = () => {
         <article>
           <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
             <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
-              <h1>Ethereum Network: Overview</h1>
+              <h1>Network Overview</h1>
               <MaybeNoBrowserProvider />
               <CurrentNetworkOverview /> <CurrentSignerOverview /> <Tokens />
             </div>

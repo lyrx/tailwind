@@ -21,7 +21,6 @@ const CurrentNetworkOverview: React.FC = () => {
         <thead>
           <tr>
             <th>Address</th>
-            <th>Balance (ETH)</th>
           </tr>
         </thead>
         <tbody>
@@ -29,6 +28,15 @@ const CurrentNetworkOverview: React.FC = () => {
             <td>
               <CurrentSignerAddress />
             </td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th>Balance (ETH)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
             <td>
               <CurrentSignerBalance />
             </td>
