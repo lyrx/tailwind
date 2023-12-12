@@ -22,8 +22,10 @@ const Tokens: React.FC = () => {
         ])
       } else if (netWorkName === 'matic') {
         setTokens([
-          //    '0xDdC34e3745ADB986a42392cEBFA2C24F72E24D4a'
+
         ])
+      } else if (netWorkName === 'bnb') {
+        setTokens(['0x94efc448e23F10732803406b62df5539a25eE4ed'])
       }
     })
   }, [context?.ethersProvider?.web3Provider])
