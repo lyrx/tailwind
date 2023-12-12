@@ -14,6 +14,27 @@ interface Props {
 }
 
 const ContextProvider: React.FC<Props> = ({ children }) => {
+
+  function maybeAddWalletListener() {
+    // @ts-ignore
+    if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
+      // @ts-ignore
+      if (!window.ethereum._listenerAdded) {
+        const onbrowserPlugin = () => {
+          //console.log('Browser plugin changed!')
+          window.location.reload()
+        }
+        // @ts-ignore
+        window.ethereum.on('accountsChanged', onbrowserPlugin)
+        // @ts-ignore
+        window.ethereum.on('chainChanged', onbrowserPlugin)
+        // @ts-ignore
+        window.ethereum._listenerAdded = true
+      }
+    }
+  }
+
+
   const [lastBlock, setLastBlock]: [BlockOrNull, BlockSetterOrNull] = useState<BlockOrNull>(null)
 
   const [web3Provider, setWeb3Provider] = useState<BrowserProviderOrNull>(
@@ -25,6 +46,7 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
   )
 
   useEffect(() => {
+    maybeAddWalletListener()
     // Define a function to fetch the block number
     const fetchLastBlock = () => web3Provider?.getBlock('latest').then((b) => setLastBlock(b))
 
