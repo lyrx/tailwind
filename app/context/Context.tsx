@@ -33,9 +33,9 @@ function maybeAddWalletListener() {
 const Context = createContext<EthersContextType>({
   ethersProvider: {
     web3Provider: null,
-    web3ProviderSetterOrNull: null,
+    web3ProviderSetter: null,
     lastBlock: null,
-    lastBlockSetterOrNull: null,
+    lastBlockSetter: null,
     defaultMainNetProvider: ethers.getDefaultProvider('mainnet'),
   },
 })

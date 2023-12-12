@@ -43,9 +43,9 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
       value={{
         ethersProvider: {
           web3Provider: web3Provider,
-          web3ProviderSetterOrNull: setWeb3Provider,
+          web3ProviderSetter: setWeb3Provider,
           lastBlock: lastBlock,
-          lastBlockSetterOrNull: setLastBlock,
+          lastBlockSetter: setLastBlock,
           defaultMainNetProvider: ethers.getDefaultProvider('mainnet'),
         },
       }}

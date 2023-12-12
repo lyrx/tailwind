@@ -12,9 +12,9 @@ export type ProviderOrNull = Provider | null | undefined
 
 export interface EthersProvider {
   web3Provider: BrowserProviderOrNull
-  web3ProviderSetterOrNull: BrowserProviderSetterOrNull
+  web3ProviderSetter: BrowserProviderSetterOrNull
   lastBlock: BlockOrNull
-  lastBlockSetterOrNull: BlockSetterOrNull
+  lastBlockSetter: BlockSetterOrNull
   defaultMainNetProvider: ProviderOrNull
 }
 export type EthersProviderOrNull = EthersProvider | null | undefined
