@@ -1,16 +1,8 @@
 'use client'
 
 import { createContext } from 'react'
-import {
-  BlockOrNull,
-  BlockSetterOrNull,
-  BrowserProviderOrNull,
-  BrowserProviderSetterOrNull,
-  EthersContextType,
-  ProviderOrNull,
-} from '@/components/ethereum/EthersDerivedTypes'
+import { EthersContextType } from '@/components/ethereum/EthersDerivedTypes'
 import { ethers } from 'ethers'
-
 
 const Context = createContext<EthersContextType>({
   ethersProvider: {
