@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useContext } from 'react'
 import Context from '../../app/context/Context'
-import { BigNumberish, ethers } from 'ethers'
+import { ethers } from 'ethers'
 
 const CurrentNetwork: React.FC = () => {
   const context = useContext(Context)
