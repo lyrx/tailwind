@@ -1,13 +1,13 @@
 'use client'
 import React, { useState, ReactNode, useEffect } from 'react'
-import Context, { createEmptyState } from './Context'
+
 import {
   BlockOrNull,
   BlockSetterOrNull,
   BrowserProviderOrNull,
-  ProviderOrNull,
 } from '@/components/ethereum/EthersDerivedTypes'
 import { ethers } from 'ethers'
+import Context from './Context'
 
 interface Props {
   children: ReactNode
@@ -40,13 +40,15 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <Context.Provider
-      value={createEmptyState(
-        lastBlock,
-        setLastBlock,
-        ethers.getDefaultProvider('mainnet'),
-        web3Provider,
-        setWeb3Provider
-      )}
+      value={{
+        ethersProvider: {
+          web3Provider: web3Provider,
+          web3ProviderSetterOrNull: setWeb3Provider,
+          lastBlock: lastBlock,
+          lastBlockSetterOrNull: setLastBlock,
+          defaultMainNetProvider: ethers.getDefaultProvider('mainnet'),
+        },
+      }}
     >
       {children}
     </Context.Provider>

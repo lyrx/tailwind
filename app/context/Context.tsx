@@ -9,6 +9,7 @@ import {
   EthersContextType,
   ProviderOrNull,
 } from '@/components/ethereum/EthersDerivedTypes'
+import { ethers } from 'ethers'
 
 function maybeAddWalletListener() {
   // @ts-ignore
@@ -28,25 +29,15 @@ function maybeAddWalletListener() {
     }
   }
 }
-export function createEmptyState(
-  aLastBlock: BlockOrNull,
-  aSetLastBlock: BlockSetterOrNull,
-  aDefaultProvider: ProviderOrNull,
-  aWeb3Provider: BrowserProviderOrNull,
-  aSetWeb3Provider: BrowserProviderSetterOrNull
-) {
-  maybeAddWalletListener()
-  return {
-    ethersProvider: {
-      web3Provider: aWeb3Provider,
-      web3ProviderSetterOrNull: aSetWeb3Provider,
-      lastBlock: aLastBlock,
-      lastBlockSetterOrNull: aSetLastBlock,
-      defaultMainNetProvider: aDefaultProvider,
-    },
-  }
-}
 
-const Context = createContext<EthersContextType>(createEmptyState(null, null, null, null, null))
+const Context = createContext<EthersContextType>({
+  ethersProvider: {
+    web3Provider: null,
+    web3ProviderSetterOrNull: null,
+    lastBlock: null,
+    lastBlockSetterOrNull: null,
+    defaultMainNetProvider: ethers.getDefaultProvider('mainnet'),
+  },
+})
 
 export default Context
