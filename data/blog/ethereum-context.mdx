@@ -1,31 +1,33 @@
 ---
-title: 'MetaMask: Context und React'
+title: 'MetaMask: Context And React'
 date: '2023-12-09'
 lastmod: '2023-12-09'
 tags: ['Web3']
-draft: true
-summary: 'Wie man MetaMask in einer REACT-Anwendung verwendet'
+draft: false
+summary: 'How to use MetaMask in a REACT application'
 images: []
 authors: ['default']
 ---
 
-Beim letzten Mal ging es darum, wie man MetaMask in eine Webseite integriert,
-genauer gesagt, wie man die Referenz `window.ethereum` benutzt.
+![](/static/images/react-context.png)
 
-Jetzt gehen wir einen Schritt weiter und beschäftigen uns mit der Frage,
-wie wir Ethers/MetaMask auf einer komplexen React-Website tatsächlich nutzen können.
+Last time we talked about how to integrate MetaMask into a website,
+more specifically, how to use the `window.ethereum` reference.
 
-Üblicherweise übergibt man sie als `props` an einzelne React-Komponenten. Da diese
-ziemlich tief geschachtelt sein können, wird das schnell kompliziert. Man nennt das Problem
+Now we go one step further and deal with the question
+how we can actually use Ethers/MetaMask on a complex React website.
+
+Usually, they are passed as `props` to individual React components. Since these
+can be quite deeply nested, this quickly becomes complicated. The problem is called
 **prop drilling**.[^1]
 
-Hier kommt der
+Here the
 [React-Context](https://react.dev/learn/passing-data-deeply-with-context)
-ins Spiel. Er verhindert das **prop drilling** und ermöglicht dadurch, dass
-ab einem bestimmten Knotenpunkt **alle** Unterkomponenten direkt auf Kontext-Informationen
-zugreifen können.
+comes into play. It prevents **prop drilling** and thus enables that
+all** subcomponents can directly access context information from a certain node.
+can directly access context information.
 
-Ich habe den Kontext für diesen Anwendungsfall folgendermassen definiert:
+I have defined the context for this use case as follows:
 
 ```tsx
 
@@ -41,11 +43,20 @@ const Context = createContext<EthersContextType>({
 
 ```
 
-Weil hier Typescript verwendet wird  (`<EthersContextType>`), ist es möglich, den Kontext
-später schnell zu erweitern und dabei von der **Typsicherheit** von Typescript zu profitieren.
+Because Typescript is used here (`<EthersContextType>`), it is possible to quickly extend the context
+quickly later and benefit from the **type safety** of Typescript.
 
-Wo der Ethereum-Kontext benötigt wird, kann er nun schnell eingebunden werden, wie z.B. in dieser
-Komponente:
+1. The MetaMask plugin as a component of the browser.
+2. `DefaultMainNetProvider` as a component of the *Ethers* library, that is used when no Ethereum Gateway
+    has  been found.
+3. `lastBlock`, the most recent block in the blockchain.
+
+These are completely different objects in reality, but they are modeled and made available
+in a uniform way. Fascinating!
+
+Where that context as a part of reality is needed, it can now be quickly included, such as in this
+component:
+
 ```tsx
 'use client'
 
@@ -65,26 +76,24 @@ const CurrentNetwork: React.FC = () => {
 export default CurrentNetwork
 ```
 
-Das ist ein dicht gepacktes Stück Code, aber es profitiert von der Kompaktheit, die
-mit **TypeScript** möglich ist. Wenn die **Kontext-API** nicht verwendet würde,
-dann würde das an dieser Stelle noch viel wilder und komplizierter aussehen. Mit
-ein wenig Grundwissen über React bleibt der Code lesbar.
+This is a densely packed piece of code, but it benefits from the compactness that
+possible with **TypeScript**. If the **Context API** was not used,
+it would look much wilder and more complicated at this point. With
+a little basic knowledge of React, the code remains readable.
 
-Wer mehr darüber erfahren möchte, der kann gerne
-[hier](https://github.com/lyrx/tailwind/blob/main/app/context/ContextProvider.tsx)
-nachschauen.
+If you would like to learn more about this, you are welcome to
+[here](https://github.com/lyrx/tailwind/blob/main/app/context/ContextProvider.tsx)
+to have a look.
 
-Es bleibt eigentlich nur zu bemerken, dass alles möglich ist, wenn man
-Ethereum und React verheiraten will. Man muss nur wissen, wie es geht ...
+All that remains to be said is that anything is possible if you want to
+Ethereum and React together. You just have to know how to do it ...
 
-[^1]: Wie immer in der Software-Entwicklung birgt jede Erweiterung die Gefahr in sich,
-dass die Anwendung zusehends komplizierter wird. **Prop drilling** ist eines
-von vielen Beispiel dafür.
-Was also tun? -- Der
-[React-Context](https://react.dev/learn/passing-data-deeply-with-context) ist ein
-möglicher Lösungsansatz dafür. Für React gibt es auch noch viele weitere Context-APIs,
-die allerdings als externe Komponenten eingebunden werden müssen. Der React-Context
-hat den Vorteil, dass er schon mit dazu gehört.
-
-
+[^1]: As always in software development, every extension harbors the risk
+that the application becomes increasingly complicated. **Prop drilling** is one
+example of this.
+So what to do? -- The
+[React-Context](https://react.dev/learn/passing-data-deeply-with-context) is only
+one solution for this. There are also many other context APIs for React,
+but these must be integrated as external components. The React context
+has the advantage that it is already included.
 
