@@ -21,9 +21,7 @@ const Tokens: React.FC = () => {
           '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE',
         ])
       } else if (netWorkName === 'matic') {
-        setTokens([
-
-        ])
+        setTokens([])
       } else if (netWorkName === 'bnb') {
         setTokens(['0x94efc448e23F10732803406b62df5539a25eE4ed'])
       }

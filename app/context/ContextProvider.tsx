@@ -14,7 +14,6 @@ interface Props {
 }
 
 const ContextProvider: React.FC<Props> = ({ children }) => {
-
   function maybeAddWalletListener() {
     // @ts-ignore
     if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
@@ -33,7 +32,6 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
       }
     }
   }
-
 
   const [lastBlock, setLastBlock]: [BlockOrNull, BlockSetterOrNull] = useState<BlockOrNull>(null)
 
