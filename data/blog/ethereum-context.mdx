@@ -13,42 +13,24 @@ Beim letzten Mal ging es darum, wie man MetaMask in eine Webseite integriert,
 genauer gesagt, wie man die Referenz `window.ethereum` benutzt.
 
 Jetzt gehen wir einen Schritt weiter und beschäftigen uns mit der Frage,
-wie wir Ethers/MetaMask  auf einer komplexten React-Website tatsächlich nutzen können.
+wie wir Ethers/MetaMask auf einer komplexen React-Website tatsächlich nutzen können.
 
-Üblicherweise übergibt man
+Üblicherweise übergibt man sie als `props` an einzelne React-Komponenten. Da diese
+ziemlich tief geschachtelt sein können, wird das schnell kompliziert. Man nennt das Problem
+**prop drilling**.[^1]
 
+Hier kommt der
+[React-Context](https://react.dev/learn/passing-data-deeply-with-context)
+ins Spiel. Er verhindert das **prop drilling** und ermöglicht dadurch, dass
+ab einem bestimmten Knotenpunkt **alle** Unterkomponenten direkt auf Kontext-Informationen
+zugreifen können.
 
+[^1]: Wie immer in der Software-Entwicklung birgt jede zusätzliche Information die Gefahr in sich,
+dass die Anwendung zusehends komplizierter wird. **Prop drilling** ist eines
+vn vielen Beispiel dafür.
+Was also tun? -- Der
+[React-Context](https://react.dev/learn/passing-data-deeply-with-context) ist ein
+möglicher Lösungsansatz dafür. Für React gibt es auch noch viele weitere Context-APIs,
+die allerdings als externe Komponenten eingebunden werden müssen. Der React-Context
+hat den Vorteil, dass er schon mit dazu gehört.
 
-![React-Context](https://react.dev/learn/passing-data-deeply-with-context)
-
-
-Einfach nur einen `Provider` initialisieren, wie ich das in meinem
-[letzten Post](ethereum-provider)
-beschrieben habe, genügt nicht. Es soll ja schliesslich darum gehen,
-dass man den Nutzer in die Lage versetzt, auf ganz unterschiedliche
-Arten und Weisen über die eigene Website mit dem Ethereum-Netzwerk zu interagieren.
-
-Das ist nicht ganz einfach. Wir wollen das Problem am Beispiel meiner
-hier im Blog verwendeten **Next.JS**-Anwendung erläutern. In einem solchen
-Fall ist der Blog im Grunde genommen, eine Software-Anwendung, also ein Programm.
-Die Software kann beliebig verändert und erweitert werden. Genau das tun wir, wenn wir
-kein Verbindung zu **MetaMask** hier einbauen.
-
-Wie immer in der Software-Entwicklung birgt jede Erweiterung die Gefahr in sich,
-dass die Anwendung zusehends komplizierter wird -- und am Ende ohne grossen Zeitaufwand
-nicht mehr wartbar ist, und schon gar nicht mehr erweiterbar.
-
-Das dahinter liegende Problem ist eigentlich immer die **Kapselung**. Das bedeutet letztendlich,
-dass mit der falschen Vorgehensweise sehr schnell jede Komponente von der anderen abhängig wird.
-
-Dieses Problem wird im Allgemeinen früh erkannt. Und dann wird gegengesteuert. Teile des Programms
-werden so konstruiert, dass sie nur noch über definierte Schnittstellen mit den anderen Teilen des
-Programms interagieren können. **Kapselung** eben!
-
-Was aber tun, wenn es übergreifende Informationen gibt, die für verschiedene Komponenten der Software
-gleichzeitig zur Verfügung stehen müssen?
-
-Dann wird recht schnell die mühsam durchdachte und eingeführte
-Kapselung zu einem Störfaktor, der zumindest teilweise wieder rückabgewickelt werden muss. Konsequenz: Die
-Software -- eben erst sorgfältig in sauber definierte Komponenten aufgeteilt -- erhält nachträglich
-Erweiterungen, durch welche die existierende
