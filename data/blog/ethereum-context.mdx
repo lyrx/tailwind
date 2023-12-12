@@ -25,9 +25,25 @@ ins Spiel. Er verhindert das **prop drilling** und ermöglicht dadurch, dass
 ab einem bestimmten Knotenpunkt **alle** Unterkomponenten direkt auf Kontext-Informationen
 zugreifen können.
 
-[^1]: Wie immer in der Software-Entwicklung birgt jede zusätzliche Information die Gefahr in sich,
+Ich habe den Kontext für diesen Anwendungsfall folgendermassen definiert:
+
+```jsx
+
+const Context = createContext<EthersContextType>({
+  ethersProvider: {
+    web3Provider: null,
+    web3ProviderSetter: null,
+    lastBlock: null,
+    lastBlockSetter: null,
+    defaultMainNetProvider: ethers.getDefaultProvider('mainnet'),
+  },
+})
+
+```
+
+[^1]: Wie immer in der Software-Entwicklung birgt jede Erweiterung die Gefahr in sich,
 dass die Anwendung zusehends komplizierter wird. **Prop drilling** ist eines
-vn vielen Beispiel dafür.
+von vielen Beispiel dafür.
 Was also tun? -- Der
 [React-Context](https://react.dev/learn/passing-data-deeply-with-context) ist ein
 möglicher Lösungsansatz dafür. Für React gibt es auch noch viele weitere Context-APIs,
