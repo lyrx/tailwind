@@ -24,6 +24,12 @@ const Tokens: React.FC = () => {
         setTokens([])
       } else if (netWorkName === 'bnb') {
         setTokens(['0x94efc448e23F10732803406b62df5539a25eE4ed'])
+      } else if (netWorkName === 'sepolia') {
+        setTokens([
+          '0x7d7582834aFdBb86FF826383346049A69733b3f9',
+          '0xd9b663D3aB9646F9DC75fc38EDE5810ec5501395',
+          '0x3ae140b15b1CE1191c30A8e4E9c401a82A8047f1',
+        ])
       }
     })
   }, [context?.ethersProvider?.web3Provider])
