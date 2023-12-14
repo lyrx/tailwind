@@ -5,30 +5,73 @@ lastmod: '2023-12-15'
 tags: ['Web3']
 draft: false
 summary: 'Ein Beispiel für die Synchronisation zwischen einer Blockchain und einer React-'
-images: [/static/images/Web3Man.png]
+images: [/static/images/MeOnWeb3.png]
 authors: ['default']
 ---
 
-![](/static/images/Web3Man.png)
+![](/static/images/MeOnWeb3.png)
 
-I have been working as a freelance IT consultant for a long time and have always billed by the hour.
+Dies ist der dritte Teil meiner Serie über MetaMask, Ethers und React.
 
-Gradually, I feel that this time should be over. Hourly billing is neither fair to a customer who expects a result,
-nor to the freelancer who would actually like to work result-oriented and satisfy the customer.
+Das Ergebnis meiner Bemühungen, die Blockchain mit diesem Blog
+zu synchronisieren, sieht man [hier](/ethereum). Es wird jeweils
+die Blocknummer des letzten empfangenen Blocks angegeben,
+und dessen Zeitstempel.
 
-Often, the work package is not clearly defined, and then the customer does not get what he really wants,
-and the freelancer is forced to bill hours without being able to deliver a meaningful result. This is in no one's interest.
+Wer eine Weile andächtig zuschaut, ob dies wirklich eine dynamische
+Anzeige ist, wird feststellen, dass Blocknummern gelegentlich
+übersprungen werden. Die Blockchain (die man zuvor in MetaMask ausgewählt
+hat) ist also schneller.
 
-Now that I am very intensively dealing with the Web3 area, it becomes even clearer to me that a rethinking is indicated here.
+Was steckt dahinter?
 
-Therefore, in the future, I want to offer billing based on a piece of work to be created.
-Often it is at least clear to the client what he needs to generate added value in his business.
-Where it is not entirely clear to him how to implement this technically, he can commission this clarification.
-Where he  has no clarity at the business level, he can commission an analysis for this.
-The consultant delivers and is paid on the basis of his delivery.
+Das Zeitintervall für die Synchronisierung ist auf 12'000 Millisekunden
+eingestellt. Es dauert also zwölf Sekunden, bevor MetaMask den neuesten
+Block anfordert. Wenn in dieser Zeit mehrere Blöcke erstellt worden
+sind, dann gibt es Sprünge in der Anzeige.
 
-The value of the service then arises directly from the achievable added value for the customer.
-Billing on an hourly basis is no longer necessary. It comes from the last century.
-It fits into a time when the work result could be read one to one from the effort.
+Und jetzt zurück zum Quellcode. 😀
 
-But when was that really ever the case?
+Beim letzten Mal hatte ich erklärt, dass der React-Kontext verwendet
+werden kann, um sich ändernde Informationen für viele Komponenten
+in der Anzeige einfach verfügbar zu machen. Wie das passieren
+kann, sehen wir [hier](https://github.com/lyrx/tailwind/blob/main/app/context/ContextProvider.tsx).
+
+Es gibt also ein Polling, das so implementiert ist:
+
+```tsx
+useEffect(() => {
+
+    // Define a function to fetch the block number
+    const fetchLastBlock = () => web3Provider?.getBlock('latest').then((b) => setLastBlock(b))
+
+    // Fetch the block number immediately on component mount
+    fetchLastBlock()
+
+    // Set up an interval to fetch the block number every 12 seconds
+    const interval = setInterval(fetchLastBlock, 12000)
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(interval)
+  }, [])
+```
+
+Und so wird der Kontext dann verwendet, um die (halbwegs) aktuelle Blocknummer anzuzeigen.
+
+```tsx
+const LastBlockNumber: React.FC = () => {
+  const context = useContext(Context)
+  return (
+    <span>
+      {context.ethersProvider?.lastBlock
+        ? context.ethersProvider.lastBlock.number.toString()
+        : '--'}
+    </span>
+  )
+}
+```
+
+Das ist gar nicht so kompliziert, nicht wahr? 😁
+
+Das war's für heute! Viel Spass beim verdauen! Beim nächsten Mal gibt noch etwas
+mehr Infos darüber, wie sich React mit MetaMask synchronisiert (oder auch nicht) ...
