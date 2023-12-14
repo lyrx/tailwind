@@ -1,43 +1,36 @@
 ---
-title: 'Arbeitsbeispiel: Die Blockchain mit dem React-Kontext synchronisieren'
+title: 'Work Example: Synchronizing the Blockchain with the React Context'
 date: '2023-12-15'
 lastmod: '2023-12-15'
 tags: ['Web3']
 draft: false
-summary: 'Ein Beispiel für die Synchronisation zwischen einer Blockchain und einer React-'
+summary: 'An example of synchronization between a blockchain and a React application.'
 images: [/static/images/MeOnWeb3.png]
 authors: ['default']
 ---
 
 ![](/static/images/MeOnWeb3.png)
 
-Dies ist der dritte Teil meiner Serie über MetaMask, Ethers und React.
 
-Das Ergebnis meiner Bemühungen, die Blockchain mit diesem Blog
-zu synchronisieren, sieht man [hier](/ethereum). Es wird jeweils
-die Blocknummer des letzten empfangenen Blocks angegeben,
-und dessen Zeitstempel.
+This is the third part of my series on MetaMask, Ethers, and React.
 
-Wer eine Weile andächtig zuschaut, ob dies wirklich eine dynamische
-Anzeige ist, wird feststellen, dass Blocknummern gelegentlich
-übersprungen werden. Die Blockchain (die man zuvor in MetaMask ausgewählt
-hat) ist also schneller.
+The result of my efforts to synchronize this blog with the blockchain can be seen here.
+It always shows the block number of the last received block and its timestamp.
 
-Was steckt dahinter?
+Those who watch for a while to see if this is really a dynamic display will notice
+that block numbers are occasionally skipped. The blockchain (which was previously selected in MetaMask) is faster.
 
-Das Zeitintervall für die Synchronisierung ist auf 12'000 Millisekunden
-eingestellt. Es dauert also zwölf Sekunden, bevor MetaMask den neuesten
-Block anfordert. Wenn in dieser Zeit mehrere Blöcke erstellt worden
-sind, dann gibt es Sprünge in der Anzeige.
+What's behind this?
 
-Und jetzt zurück zum Quellcode. 😀
+The time interval for synchronization is set to 12,000 milliseconds. So it takes twelve seconds before MetaMask requests the latest block. If several blocks have been created during this time, then there will be jumps in the display.
 
-Beim letzten Mal hatte ich erklärt, dass der React-Kontext verwendet
-werden kann, um sich ändernde Informationen für viele Komponenten
-in der Anzeige einfach verfügbar zu machen. Wie das passieren
-kann, sehen wir [hier](https://github.com/lyrx/tailwind/blob/main/app/context/ContextProvider.tsx).
+And now back to the source code. 😀
 
-Es gibt also ein Polling, das so implementiert ist:
+Last time, I explained that the React context can be used to make changing information
+easily available for many components in the display.
+How this can happen can be seen [here](https://github.com/lyrx/tailwind/blob/main/app/context/ContextProvider.tsx).
+
+So there's a polling implemented like this:
 
 ```tsx
 useEffect(() => {
@@ -56,7 +49,8 @@ useEffect(() => {
   }, [])
 ```
 
-Und so wird der Kontext dann verwendet, um die (halbwegs) aktuelle Blocknummer anzuzeigen.
+And so the context is then used to display the (somewhat) current block number.
+
 
 ```tsx
 const LastBlockNumber: React.FC = () => {
@@ -71,7 +65,13 @@ const LastBlockNumber: React.FC = () => {
 }
 ```
 
-Das ist gar nicht so kompliziert, nicht wahr? 😁
+That's not so complicated, is it? 😁
 
-Das war's für heute! Viel Spass beim verdauen! Beim nächsten Mal gibt noch etwas
-mehr Infos darüber, wie sich React mit MetaMask synchronisiert (oder auch nicht) ...
+That's it for today! Have fun digesting it! Next time there will be a
+bit more information about how React syncs with MetaMask (or not)...
+
+
+
+
+
+
