@@ -10,7 +10,7 @@ const MaybeNoBrowserProvider: React.FC = () => {
   )
   useEffect(() => {
     if (context?.ethersProvider?.web3Provider) {
-      setErrorMessage('Browser Plugin found. (MetaMask or similar)')
+      setErrorMessage('')
     } else if (context?.ethersProvider?.defaultMainNetProvider) {
       setErrorMessage(
         'Connection to Ethereum Network limited, no Browser Plugin found. ' +

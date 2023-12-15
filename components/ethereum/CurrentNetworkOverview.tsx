@@ -20,7 +20,7 @@ const CurrentNetworkOverview: React.FC = () => {
   return hasNetwork ? (
     <>
       <h2>
-        Network configured in plugin: '<CurrentNetwork />'
+        <CurrentNetwork />
       </h2>
       <table className="table-auto">
         <tbody>
