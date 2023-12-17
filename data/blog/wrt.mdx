@@ -1,0 +1,87 @@
+---
+title: 'One Token To Rule Them All'
+date: '2023-12-17'
+lastmod: '2023-12-17'
+tags: ['Web3']
+draft: false
+summary: 'Kann eine Krypto-Währung als Tauschmittel für Waren und Dienstleistungen verwendet werden?'
+images: []
+authors: ['default']
+---
+
+![](/static/images/wrt.png)
+
+Kryptobewährungen sind bisher immer daran gescheitert, dass sie nicht zu einem
+alltäglichen Zahlungsmittel geworden sind. An Bitcoin sieht man das besonders deutlich.
+Es wird im Wesentlichen über den Wert definiert und eingeschätzt, den es auf Kryptobörsen hat.
+**Der Wert in Fiat-Währung!**
+
+Bei Ethereum ist es ähnlich. Dort ist zwar über *Tokens*, *NFTs* und
+dezentrale Tauschbörsen (*"DEX"* genannt) eine Parallelwelt
+entstanden, aber diese hat bis heute nicht viel mit dem Alltag der meisten Menschen zu tun. **Bargeld,
+Kreditkarte, Bankkarte, das sind die Zahlungsmittel der Gegenwart.** Es sieht nicht so aus,
+als ob sich das bald ändern würde.
+
+Mehre Gründe für diesen Zustand liegen auf der Hand:
+
+- Die technischen Voraussetzungen sind noch nicht zu 100 Prozent gegeben
+- Die Akzeptanz in der Bevölkerung für ein nicht-staatliches Zahlungsmittel ist nicht gegeben
+- Staaten verhindern die Ausbreitung von Kryptowährungen, da diese ihren Machtanspruch infrage
+  stellen würden
+- Jede neue Kryptowährung, die zum Ziel hätte, ein globales Zahlungsmittel zu werden, würde
+  sofort zum Spekulationsobjekt und zum Werkzeug für Kriminelle
+- Eine solche Kryptowährung wäre in vielen Staaten illegal
+- Durch den Handel auf Kryptobörsen würde eine solche Währung an Fiat-Währungen gekoppelt werden.
+  Am Ende wäre sie an Fiat-Währung gekoppelt und ohne diese nicht überlebensfähig.
+
+All das führt dazu, dass Kryptowährungen nicht als Tauschmittel für Waren und Dienstleistungen
+eingesetzt werden können.
+
+Stellen wir uns also die Frage, wie das geändert werden könnte. Welche Voraussetzungen müsste es geben,
+dass aus einer Kryptowährung tatsächlich **Geld** wird?
+
+Ich halte zunächst folgende Bedingungen für notwendig:
+
+- Die neue Kryptowährung (nennen wir sie
+  [WRT](https://github.com/lyrx/wrt))
+  darf nicht an Tauschbörsen gehandelt werden,
+  seien diese nun zentral oder dezentral.
+- [WRT](https://github.com/lyrx/wrt) darf nicht von einem Staat emitiert werden, sondern
+  muss von einer unabhängigen Instanz
+  kontrolliert werden, die das internationale Wohl im Blick hat und nicht das Interesse eines
+  einzelnen Staates vertritt
+- Die Transaktionsgebühren (*Gaskosten*) müssen sehr gering oder Null sein
+- Die technische Infrastruktur muss überall auf der Welt so weit fortgeschritten sein, dass
+  [WRT](https://github.com/lyrx/wrt) verwendet werden kann, ohne technisch Kenntnisse und ohne
+  eine besondere Ausbildung.
+
+Schränken wir diese Fragestellung weiter ein, damit sie handhabbar wird! -- Wie müsste ein
+ERC20-Token so in Solidity entwickelt und gehandhabt werden, dass es möglichst viele
+der obigen Anforderungen erfüllen kann?
+
+Es ist klar, dass die Antwort auf diese Frage auch heute noch nur eine Utopie sein kann. Allerdings
+ist es eine Utopie, die es schon seit Bitcoin -- und seit dessen Vorläufern -- gibt. Viele Menschen
+träumen davon, und keiner weiss, ob und wie aus dieser Utopie je Wirklichkeit werden kann.
+
+**Genau darin besteht aber der Reiz!** Bisher ist mir folgende Liste dazu eingefallen
+(Einiges Punkte auf der Liste sind Ideen, Möglichkeiten, Optionen --
+kein in Stein gemeiselter Plan):
+
+- Verwendung von **OpenZeppelin**, ein bewährtes Framework für Smart Contracts auf Ethereum,
+  das Sicherheit und einfache Wartung bietet.
+- **Whitelist/Blacklist:** Implementierung einer Whitelist oder Blacklist,
+  um die Adressen zu kontrollieren, mit denen Transaktionen durchgeführt werden können.
+- **Überwachung von Transfers:** Implementierung von Mechanismen, um große Transfers zu überwachen
+  und zu genehmigen
+- **Auswahl einer Second-Layer-Chain:** Einsatz einer Second-Layer-Chain wie Polygon oder Arbitrum.
+- **Rechtskonformität:** Einhaltung lokaler und internationaler Vorschriften.
+- **Marktkontrolle:** Interventionen auf Kryptomärkten, um den Preis nach unten zu drücken und
+  so den Handel zu verhindern oder zumindest einzuschränken. Das ist heute schon die Vorgehensweise,
+  die Staaten über ihre Nationalbanken nutzen, um ihre Währungskurse stabil zu halten. **Legale**
+  Markmanipulation heute -- **legale** Marktmanipulation morgen!
+
+Ich denke, dass die Emission einer solchen Währung eine Mammutaufgabe sonder gleichen ist.
+Nur mit einer gewissen Hybris konnte ich dazu einen [Anfang](https://github.com/lyrx/wrt)
+machen. Was wäre zu tun? Wie wäre ein solches Token zu implementieren, um dem Ziel
+tatsächlich näher zu kommen? Kann ein solches Token tatsächlich ein
+Tauschmittel für Waren und Dienstleistungen werden?
