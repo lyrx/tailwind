@@ -23,7 +23,7 @@ const CurrentNetworkOverview: React.FC = () => {
   return hasNetwork ? (
     <>
       <p className={'text-primary-500'}>
-        Connected to the '<CurrentNetwork />' network (ID: <DisplayChainId />
+        On '<CurrentNetwork />' (Network-ID: <DisplayChainId />
         ) since <FirstBlockTimestamp />.
       </p>
 
