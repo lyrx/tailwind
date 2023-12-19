@@ -10,6 +10,7 @@ import Context from '../../app/context/Context'
 import DisplayChainId from '@/components/ethereum/DisplayChainId'
 import FirstPluginDisplay from '@/components/ethereum/FirstPluginDisplay'
 import BlockFirstSeenTimestamp from '@/components/ethereum/BlockFirstSeenTimestamp'
+import ElapsedTime from '@/components/ethereum/ElapsedTime'
 
 const CurrentNetworkOverview: React.FC = () => {
   const context = useContext(Context)
@@ -24,7 +25,7 @@ const CurrentNetworkOverview: React.FC = () => {
     <>
       <p className={'text-primary-500'}>
         On '<CurrentNetwork />' (Network-ID: <DisplayChainId />
-        ) since <BlockFirstSeenTimestamp />.
+        ) since <ElapsedTime />
       </p>
 
       <table className="table-auto">
