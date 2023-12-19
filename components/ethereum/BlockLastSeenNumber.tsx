@@ -4,15 +4,15 @@ import React, { useEffect, useState, useContext } from 'react'
 import Context from '../../app/context/Context'
 import { BigNumberish, ethers } from 'ethers'
 
-const LastBlockTimestamp: React.FC = () => {
+const BlockLastSeenNumber: React.FC = () => {
   const context = useContext(Context)
   return (
     <span>
       {context.ethersProvider?.lastBlock
-        ? new Date(context.ethersProvider.lastBlock.timestamp * 1000).toLocaleTimeString()
+        ? context.ethersProvider.lastBlock.number.toString()
         : '--'}
     </span>
   )
 }
 
-export default LastBlockTimestamp
+export default BlockLastSeenNumber

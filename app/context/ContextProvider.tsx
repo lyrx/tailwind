@@ -10,7 +10,7 @@ import {
 } from '@/components/ethereum/EthersDerivedTypes'
 import { ethers } from 'ethers'
 import Context from './Context'
-import firstBlockTimestamp from '@/components/ethereum/FirstBlockTimestamp'
+import firstBlockTimestamp from '@/components/ethereum/BlockFirstSeenTimestamp'
 
 interface Props {
   children: ReactNode
