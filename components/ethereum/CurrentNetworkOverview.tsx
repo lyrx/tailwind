@@ -7,6 +7,8 @@ import LastBlockNumber from '@/components/ethereum/LastBlockNumber'
 import LastBlockTimestamp from '@/components/ethereum/LastBlockTimestamp'
 import Watch from '@/components/ethereum/Watch'
 import Context from '../../app/context/Context'
+import DisplayChainId from '@/components/ethereum/DisplayChainId'
+import FirstPluginDisplay from '@/components/ethereum/FirstPluginDisplay'
 
 const CurrentNetworkOverview: React.FC = () => {
   const context = useContext(Context)
@@ -19,9 +21,10 @@ const CurrentNetworkOverview: React.FC = () => {
 
   return hasNetwork ? (
     <>
-      <h2>
-        <CurrentNetwork />
-      </h2>
+      <p className={'text-primary-500'}>
+        Connected to the <CurrentNetwork /> network (<DisplayChainId />).
+      </p>
+
       <table className="table-auto">
         <tbody>
           <tr>
