@@ -30,7 +30,7 @@ const LoginButton = () => {
         <circle cx="12" cy="12" r="9" fill="none" stroke={foreground} />
         <circle cx="12" cy="10" r="3" fill={foreground} />
         <rect x="11" y="12" width="2" height="6" fill={foreground} />
-        <text x="25" y="18" font-family="Arial" font-size="15" fill={foreground}>
+        <text x="25" y="18" fontFamily="Arial" fontSize="15" fill={foreground}>
           Login
         </text>
       </svg>
