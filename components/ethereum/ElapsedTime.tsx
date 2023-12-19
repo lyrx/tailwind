@@ -37,7 +37,7 @@ const Watch: React.FC = () => {
       const firstSeenTimeStamp = context.ethersProvider?.blockFirstSeen?.timestamp
       const currentTime = new Date().getTime()
       const elapsed = firstSeenTimeStamp ? currentTime - firstSeenTimeStamp * 1000 : -1
-      setTime(elapsed >= 0 ? formatTime(elapsed) : '--')
+      setTime(elapsed >= 0 ? formatTime(elapsed) : '')
     }
 
     // Fetch the block number immediately on component mount
