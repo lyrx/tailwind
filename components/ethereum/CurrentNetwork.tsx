@@ -6,11 +6,11 @@ import { ethers } from 'ethers'
 
 const CurrentNetwork: React.FC = () => {
   const context = useContext(Context)
-  const [network, setNetwork] = useState<ethers.Network | null | undefined>(null)
-  useEffect(() => {
-    context?.ethersProvider?.web3Provider?.getNetwork().then((n) => setNetwork(n))
-  }, [context?.ethersProvider?.web3Provider])
-  return network ? <span>{network?.name}</span> : <span>`--`</span>
+  return context.ethersProvider?.network ? (
+    <span>{context.ethersProvider.network.name}</span>
+  ) : (
+    <span>`--`</span>
+  )
 }
 
 export default CurrentNetwork

@@ -5,6 +5,8 @@ import {
   BlockOrNull,
   BlockSetterOrNull,
   BrowserProviderOrNull,
+  NetworkOrNull,
+  NetworkSetterOrNull,
 } from '@/components/ethereum/EthersDerivedTypes'
 import { ethers } from 'ethers'
 import Context from './Context'
@@ -34,6 +36,7 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
   }
 
   const [lastBlock, setLastBlock]: [BlockOrNull, BlockSetterOrNull] = useState<BlockOrNull>(null)
+  const [network, setNetwork]: [NetworkOrNull, NetworkSetterOrNull] = useState<NetworkOrNull>(null)
 
   const [web3Provider, setWeb3Provider] = useState<BrowserProviderOrNull>(
     // @ts-ignore
@@ -48,11 +51,16 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
     // Define a function to fetch the block number
     const fetchLastBlock = () => web3Provider?.getBlock('latest').then((b) => setLastBlock(b))
 
+    const fetchNetwork = () => web3Provider?.getNetwork().then((n) => setNetwork(n))
+    const syncWithBlockChain = () => {
+      fetchLastBlock()
+      fetchNetwork()
+    }
     // Fetch the block number immediately on component mount
-    fetchLastBlock()
+    syncWithBlockChain()
 
     // Set up an interval to fetch the block number every 12 seconds
-    const interval = setInterval(fetchLastBlock, 12000)
+    const interval = setInterval(syncWithBlockChain, 12000)
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval)
@@ -67,6 +75,8 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
           lastBlock: lastBlock,
           lastBlockSetter: setLastBlock,
           defaultMainNetProvider: ethers.getDefaultProvider('mainnet'),
+          network: network,
+          networkSetter: setNetwork,
         },
       }}
     >
