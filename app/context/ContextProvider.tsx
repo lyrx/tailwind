@@ -64,11 +64,12 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
     const fetchNetwork = () => web3Provider?.getNetwork().then((n) => setNetwork(n))
     const syncWithBlockChain = () => {
       fetchLastBlock()
-      fetchNetwork()
+      //maybe more later
     }
     // Fetch the block number immediately on component mount
     syncWithBlockChain()
     fetchFirstBlock()
+    fetchNetwork()
 
     // Set up an interval to fetch the block number every 12 seconds
     const interval = setInterval(syncWithBlockChain, 12000)
