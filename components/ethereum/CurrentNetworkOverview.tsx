@@ -9,6 +9,7 @@ import Watch from '@/components/ethereum/Watch'
 import Context from '../../app/context/Context'
 import DisplayChainId from '@/components/ethereum/DisplayChainId'
 import FirstPluginDisplay from '@/components/ethereum/FirstPluginDisplay'
+import FirstBlockTimestamp from '@/components/ethereum/FirstBlockTimestamp'
 
 const CurrentNetworkOverview: React.FC = () => {
   const context = useContext(Context)
@@ -23,7 +24,7 @@ const CurrentNetworkOverview: React.FC = () => {
     <>
       <p className={'text-primary-500'}>
         Connected to the '<CurrentNetwork />' network (ID: <DisplayChainId />
-        ).
+        ) since <FirstBlockTimestamp />.
       </p>
 
       <table className="table-auto">

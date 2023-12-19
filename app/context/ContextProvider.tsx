@@ -10,6 +10,7 @@ import {
 } from '@/components/ethereum/EthersDerivedTypes'
 import { ethers } from 'ethers'
 import Context from './Context'
+import firstBlockTimestamp from '@/components/ethereum/FirstBlockTimestamp'
 
 interface Props {
   children: ReactNode
@@ -49,13 +50,15 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     maybeAddWalletListener()
-    // Define a function to fetch the block number
+
     const fetchLastBlock = () =>
       web3Provider?.getBlock('latest').then((b) => {
         setLastBlock(b)
-        if (!blockFirstSeen) {
-          setBlockFirstSeen(b)
-        }
+      })
+
+    const fetchFirstBlock = () =>
+      web3Provider?.getBlock('latest').then((b) => {
+        setBlockFirstSeen(b)
       })
 
     const fetchNetwork = () => web3Provider?.getNetwork().then((n) => setNetwork(n))
@@ -65,6 +68,7 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
     }
     // Fetch the block number immediately on component mount
     syncWithBlockChain()
+    fetchFirstBlock()
 
     // Set up an interval to fetch the block number every 12 seconds
     const interval = setInterval(syncWithBlockChain, 12000)
@@ -81,8 +85,8 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
           web3ProviderSetter: setWeb3Provider,
           lastBlock: lastBlock,
           lastBlockSetter: setLastBlock,
-          blockFirstSeen: null,
-          blockFirstSeenSetter: null,
+          blockFirstSeen: blockFirstSeen,
+          blockFirstSeenSetter: setBlockFirstSeen,
           defaultMainNetProvider: ethers.getDefaultProvider('mainnet'),
           network: network,
           networkSetter: setNetwork,
