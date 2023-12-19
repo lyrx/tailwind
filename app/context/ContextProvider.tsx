@@ -36,8 +36,9 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
   }
 
   const [lastBlock, setLastBlock]: [BlockOrNull, BlockSetterOrNull] = useState<BlockOrNull>(null)
+  const [blockFirstSeen, setBlockFirstSeen]: [BlockOrNull, BlockSetterOrNull] =
+    useState<BlockOrNull>(null)
   const [network, setNetwork]: [NetworkOrNull, NetworkSetterOrNull] = useState<NetworkOrNull>(null)
-
   const [web3Provider, setWeb3Provider] = useState<BrowserProviderOrNull>(
     // @ts-ignore
     typeof window !== 'undefined' && typeof window.ethereum !== 'undefined'
@@ -49,7 +50,13 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     maybeAddWalletListener()
     // Define a function to fetch the block number
-    const fetchLastBlock = () => web3Provider?.getBlock('latest').then((b) => setLastBlock(b))
+    const fetchLastBlock = () =>
+      web3Provider?.getBlock('latest').then((b) => {
+        setLastBlock(b)
+        if (!blockFirstSeen) {
+          setBlockFirstSeen(b)
+        }
+      })
 
     const fetchNetwork = () => web3Provider?.getNetwork().then((n) => setNetwork(n))
     const syncWithBlockChain = () => {
@@ -74,6 +81,8 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
           web3ProviderSetter: setWeb3Provider,
           lastBlock: lastBlock,
           lastBlockSetter: setLastBlock,
+          blockFirstSeen: null,
+          blockFirstSeenSetter: null,
           defaultMainNetProvider: ethers.getDefaultProvider('mainnet'),
           network: network,
           networkSetter: setNetwork,

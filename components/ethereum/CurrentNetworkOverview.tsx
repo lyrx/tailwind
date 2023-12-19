@@ -22,7 +22,8 @@ const CurrentNetworkOverview: React.FC = () => {
   return hasNetwork ? (
     <>
       <p className={'text-primary-500'}>
-        Connected to the <CurrentNetwork /> network (<DisplayChainId />).
+        Connected to the '<CurrentNetwork />' network (ID: <DisplayChainId />
+        ).
       </p>
 
       <table className="table-auto">

@@ -13,6 +13,8 @@ const Context = createContext<EthersContextType>({
     defaultMainNetProvider: ethers.getDefaultProvider('mainnet'),
     network: null,
     networkSetter: null,
+    blockFirstSeen: null,
+    blockFirstSeenSetter: null,
   },
 })
 

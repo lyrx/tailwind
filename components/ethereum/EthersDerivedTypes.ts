@@ -26,6 +26,8 @@ export interface EthersProvider {
   web3ProviderSetter: BrowserProviderSetterOrNull
   lastBlock: BlockOrNull
   lastBlockSetter: BlockSetterOrNull
+  blockFirstSeen: BlockOrNull
+  blockFirstSeenSetter: BlockSetterOrNull
   network: NetworkOrNull
   networkSetter: NetworkSetterOrNull
   defaultMainNetProvider: ProviderOrNull
