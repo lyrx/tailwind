@@ -11,6 +11,7 @@ import DisplayChainId from '@/components/ethereum/DisplayChainId'
 import FirstPluginDisplay from '@/components/ethereum/FirstPluginDisplay'
 import BlockFirstSeenTimestamp from '@/components/ethereum/BlockFirstSeenTimestamp'
 import ElapsedTime from '@/components/ethereum/ElapsedTime'
+import BlocksCreated from '@/components/ethereum/BlocksCreated'
 
 const CurrentNetworkOverview: React.FC = () => {
   const context = useContext(Context)
@@ -25,31 +26,8 @@ const CurrentNetworkOverview: React.FC = () => {
     <>
       <p className={'text-primary-500'}>
         On '<CurrentNetwork />' (Network-ID: <DisplayChainId />
-        ) since <ElapsedTime />
+        ) since <ElapsedTime />, counting <BlocksCreated /> new blocks.
       </p>
-
-      <table className="table-auto">
-        <tbody>
-          <tr>
-            <td>Last Block Number:</td>
-            <td>
-              <BlockLastSeenNumber />
-            </td>
-          </tr>
-          <tr>
-            <td>Last block timestamp:</td>
-            <td>
-              <BlockLastSeenTimestamp />
-            </td>
-          </tr>
-          <tr>
-            <td>Current Time:</td>
-            <td>
-              <Watch />
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </>
   ) : null
 }
