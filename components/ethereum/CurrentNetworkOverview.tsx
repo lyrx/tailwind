@@ -31,7 +31,7 @@ const CurrentNetworkOverview: React.FC = () => {
         You can select the network using your browser plugin (MetaMask or other).
       </p>
       <p className={introStyle}>
-        Time elapsed between first block detection and the latest sync is <ElapsedTime />.
+        Time elapsed between first and the latest sync is <ElapsedTime />.
       </p>
       <p className={introStyle}>
         Counting <BlocksCreated /> new blocks. The first detected block has been created at{' '}
