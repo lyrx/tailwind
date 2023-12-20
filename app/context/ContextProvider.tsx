@@ -12,7 +12,7 @@ import {
 } from '@/components/ethereum/EthersDerivedTypes'
 import { ethers } from 'ethers'
 import Context from './Context'
-import firstBlockTimestamp from '@/components/ethereum/BlockFirstSeenTimestamp'
+import config from '../config'
 
 interface Props {
   children: ReactNode
@@ -77,7 +77,7 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
     fetchNetwork()
 
     // Set up an interval to fetch the block number every 12 seconds
-    const interval = setInterval(syncWithBlockChain, 12000)
+    const interval = setInterval(syncWithBlockChain, config().syncRateMilliseconds)
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval)
