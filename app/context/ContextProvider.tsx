@@ -7,6 +7,8 @@ import {
   BrowserProviderOrNull,
   NetworkOrNull,
   NetworkSetterOrNull,
+  DateSetterOrNull,
+  DateOrNull,
 } from '@/components/ethereum/EthersDerivedTypes'
 import { ethers } from 'ethers'
 import Context from './Context'
@@ -39,6 +41,8 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
   const [lastBlock, setLastBlock]: [BlockOrNull, BlockSetterOrNull] = useState<BlockOrNull>(null)
   const [blockFirstSeen, setBlockFirstSeen]: [BlockOrNull, BlockSetterOrNull] =
     useState<BlockOrNull>(null)
+  const [dateFirstSeen, setDateFirstSeen]: [DateOrNull, DateSetterOrNull] =
+    useState<DateOrNull>(null)
   const [network, setNetwork]: [NetworkOrNull, NetworkSetterOrNull] = useState<NetworkOrNull>(null)
   const [web3Provider, setWeb3Provider] = useState<BrowserProviderOrNull>(
     // @ts-ignore
@@ -59,6 +63,7 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
     const fetchFirstBlock = () =>
       web3Provider?.getBlock('latest').then((b) => {
         setBlockFirstSeen(b)
+        setDateFirstSeen(new Date())
       })
 
     const fetchNetwork = () => web3Provider?.getNetwork().then((n) => setNetwork(n))
@@ -91,6 +96,8 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
           defaultMainNetProvider: ethers.getDefaultProvider('mainnet'),
           network: network,
           networkSetter: setNetwork,
+          dateFirstSeen: dateFirstSeen,
+          dateFirstSeenSetter: setDateFirstSeen,
         },
       }}
     >

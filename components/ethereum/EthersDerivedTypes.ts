@@ -3,6 +3,10 @@ export type BlockOrNull = Block | null | undefined
 export type BlockSetter = (value: ((prevState: BlockOrNull) => BlockOrNull) | Block | null) => void
 export type BlockSetterOrNull = BlockSetter | null | undefined
 
+export type DateOrNull = Date | null | undefined
+export type DateSetter = (value: ((prevState: DateOrNull) => DateOrNull) | Date | null) => void
+export type DateSetterOrNull = DateSetter | null | undefined
+
 export type BrowserProviderOrNull = BrowserProvider | null | undefined
 export type BrowserProviderSetter = (
   value: ((prevState: BrowserProviderOrNull) => BrowserProviderOrNull) | BrowserProvider | null
@@ -28,6 +32,8 @@ export interface EthersProvider {
   lastBlockSetter: BlockSetterOrNull
   blockFirstSeen: BlockOrNull
   blockFirstSeenSetter: BlockSetterOrNull
+  dateFirstSeen: DateOrNull
+  dateFirstSeenSetter: DateSetterOrNull
   network: NetworkOrNull
   networkSetter: NetworkSetterOrNull
   defaultMainNetProvider: ProviderOrNull

@@ -34,9 +34,9 @@ const Watch: React.FC = () => {
     }
 
     const updateDate = () => {
-      const firstSeenTimeStamp = context.ethersProvider?.blockFirstSeen?.timestamp
+      const firstSeenTimeStamp = context.ethersProvider?.dateFirstSeen?.getTime()
       const currentTime = new Date().getTime()
-      const elapsed = firstSeenTimeStamp ? currentTime - firstSeenTimeStamp * 1000 : -1
+      const elapsed = firstSeenTimeStamp ? currentTime - firstSeenTimeStamp : -1
       setTime(elapsed >= 0 ? formatTime(elapsed) : '')
     }
 

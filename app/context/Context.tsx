@@ -15,6 +15,8 @@ const Context = createContext<EthersContextType>({
     networkSetter: null,
     blockFirstSeen: null,
     blockFirstSeenSetter: null,
+    dateFirstSeen: null,
+    dateFirstSeenSetter: null,
   },
 })
 
