@@ -6,18 +6,13 @@ import Context from '../../app/context/Context'
 const MaybeNoBrowserProvider: React.FC = () => {
   const context = useContext(Context)
   const [errorMessage, setErrorMessage] = useState<string>(
-    `Initializing Connection to Ethereum Network`
+    `Initializing Connection to  the network`
   )
   useEffect(() => {
     if (context?.ethersProvider?.web3Provider) {
       setErrorMessage('')
-    } else if (context?.ethersProvider?.defaultMainNetProvider) {
-      setErrorMessage(
-        'Connection to Ethereum Network limited, no Browser Plugin found. ' +
-          'This page will be empty.'
-      )
     } else {
-      setErrorMessage('Connection to Ethereum Network not possible.')
+      setErrorMessage('Connection to network is not possible. No browser plugin has been found.')
     }
   }, [context?.ethersProvider?.web3Provider])
   return (

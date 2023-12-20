@@ -2,11 +2,8 @@
 
 import MaybeNoBrowserProvider from '@/components/ethereum/MaybeNoBrowserProvider'
 import SectionContainer from '@/components/SectionContainer'
-import React, { useContext } from 'react'
-import Context from '../context/Context'
-import Tokens from '@/components/ethereum/ERC20/Tokens'
+import React from 'react'
 import CurrentNetworkOverview from '@/components/ethereum/CurrentNetworkOverview'
-import CurrentSignerOverview from '@/components/ethereum/CurrentSignerOverview'
 import ContextProvider from '../context/ContextProvider'
 
 const EthComponent: React.FC = () => {
@@ -17,9 +14,9 @@ const EthComponent: React.FC = () => {
         <article>
           <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
             <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
-              <h1>Network Overview</h1>
+              <h1>Blockchain Network Connection</h1>
               <MaybeNoBrowserProvider />
-               <CurrentNetworkOverview />
+              <CurrentNetworkOverview />
             </div>
           </div>
         </article>

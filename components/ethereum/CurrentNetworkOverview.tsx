@@ -23,14 +23,19 @@ const CurrentNetworkOverview: React.FC = () => {
   return hasNetwork ? (
     <>
       <p className={introStyle}>
-        This page syncs with '<CurrentNetwork />' (Network-ID: <DisplayChainId />) every{' '}
-        {config().syncRateMilliseconds} milliseconds.
+        This page demonstrates synchronizations with '<CurrentNetwork />' (Network-ID:{' '}
+        <DisplayChainId />
+        ). The sync rate is {config().syncRateMilliseconds} milliseconds.
       </p>
       <p className={introStyle}>
-        Time between first detected block and latest detected block is <ElapsedTime />.
+        You can select the network using your browser plugin (MetaMask or other).
       </p>
       <p className={introStyle}>
-        Counting <BlocksCreated /> new blocks since <BlockFirstSeenTimestamp />
+        Time elapsed between first block detection and the latest sync is <ElapsedTime />.
+      </p>
+      <p className={introStyle}>
+        Counting <BlocksCreated /> new blocks. The first detected block has been created at{' '}
+        <BlockFirstSeenTimestamp />.
       </p>
     </>
   ) : null
