@@ -3,11 +3,26 @@
 import React, { useEffect, useState, useContext } from 'react'
 import Context from '../../app/context/Context'
 import ERC20 from './ERC20/ERC20'
-import { ethers } from 'ethers'
+import { ethers, Signer } from 'ethers'
 
 const SignerBalance: React.FC<{ contractAddress: string }> = ({ contractAddress }) => {
   const context = useContext(Context)
   const [balance, setBalance] = useState<string>('--')
+
+  function signerDemo(signer: Signer) {
+    const message = 'Your message here'
+    signer.signMessage(message).then((signature: string) => {
+      const signerAddress = ethers.verifyMessage(message, signature)
+      signer.getAddress().then((address: string) => {
+        if (address === signerAddress) {
+          // signature check good!
+        } else {
+          // signature check bad!
+        }
+      })
+    })
+  }
+
   useEffect(() => {
     context.ethersProvider?.web3Provider?.getSigner().then((s) => {
       return s.getAddress().then((a) => {
