@@ -26,7 +26,7 @@ const CurrentNetworkOverview: React.FC = () => {
     <>
       <p className={'text-primary-500'}>
         On '<CurrentNetwork />' (Network-ID: <DisplayChainId />
-        ), counting <BlocksCreated /> new blocks <ElapsedTime />
+        ), counting <BlocksCreated /> new blocks, time elapsed: <ElapsedTime />
       </p>
     </>
   ) : null

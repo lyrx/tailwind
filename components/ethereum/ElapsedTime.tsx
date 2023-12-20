@@ -6,8 +6,6 @@ import { BigNumberish, ethers } from 'ethers'
 
 const Watch: React.FC = () => {
   const context = useContext(Context)
-  const [time, setTime] = useState<string>('--')
-
   function formatTime(milliseconds) {
     const oneSecond = 1000
     const oneMinute = oneSecond * 60
@@ -28,29 +26,14 @@ const Watch: React.FC = () => {
     }${seconds > 0 ? seconds + 's ' : ''}${milliseconds}ms`
   }
 
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return
-    }
+  const updateDate = () => {
+    const firstSeenTimeStamp = context.ethersProvider?.dateFirstSeen?.getTime()
+    const currentTime = new Date().getTime()
+    const elapsed = firstSeenTimeStamp ? currentTime - firstSeenTimeStamp : -1
+    return elapsed >= 0 ? formatTime(elapsed) : ''
+  }
 
-    const updateDate = () => {
-      const firstSeenTimeStamp = context.ethersProvider?.dateFirstSeen?.getTime()
-      const currentTime = new Date().getTime()
-      const elapsed = firstSeenTimeStamp ? currentTime - firstSeenTimeStamp : -1
-      setTime(elapsed >= 0 ? formatTime(elapsed) : '')
-    }
-
-    // Fetch the block number immediately on component mount
-    updateDate()
-
-    // Set up an interval to fetch the block number every 12 seconds
-    const interval = setInterval(updateDate, 500)
-
-    // Clean up the interval when the component unmounts
-    return () => clearInterval(interval)
-  }, [context?.ethersProvider?.web3Provider])
-
-  return <span className={'font-mono'}>{time}</span>
+  return <span className={'font-mono'}>{updateDate()}</span>
 }
 
 export default Watch
