@@ -1,34 +1,60 @@
 ---
 title: 'Digitale Unterschriften'
-date: '2023-12-20'
-lastmod: '2023-12-20'
+date: '2023-12-22'
+lastmod: '2023-12-22'
 tags: ['Web3']
 draft: true
 summary: 'Was Sie schon immer über digitale Signaturen wissen wollten -- aber nicht zu fragen wagten.'
-images: ['']
+images: ['/static/images/digital_signatures.png']
 ---
 
+![](/static/images/digital_signatures.png)
+
 Heute und gestern habe ich mich wieder mal mit digitalen Signaturen beschäftigt. Auf Blockchains wird
-jede Transaktion digital signiert, und wer ein Wallet wie **MetaMask** benutzt, kann das nutzen, um
-beliebige Dokumente signieren. Wie das in wenigen Zeilen zu codieren ist, wenn man
-über ein paar Programmierkenntnisse verfügt, findet sich
-[hier](https://github.com/lyrx/ethsigner/blob/main/scripts/index.js).
+jede Transaktion digital signiert, und wer ein Krypto-Wallet benutzt, kann das nutzen, um
+beliebige Dokumente signieren. Das ist in wenigen Typescript-Zeilen
+ungefähr so zu implementieren:
 
-Das kleine Script setzt eigentlich nur den *privaten Schlüssel* einer Ethereum-Adresse voraus.[^1 Schon
-kann ein mündiger Benutzer unter jedes digitale Dokument seine
-digitale Unterschrift setzen --  wenn er eben eine Ethereum-Adresse besitzt, mit der er auch tatsächlich
-umgehen kann und versteht, was er da tut.
+```ts
+import { ethers, Signer } from 'ethers'
 
-Wer aber unterschreiben kann, hat fast schon eine unverwechselbare Identität ... eine digitale Identität.
-Die Möglichkeiten, die sich daraus ergeben, sind endlos, wenn man etwas Fantasie hat.
+  async function signerDemo(signer, message) {
+    if (
+      (await signer.getAddress()) ===
+      ethers.verifyMessage(message, await signer.signMessage(message))
+    ) [...]
+  }
+
+```
+
+Dieser Code könnte so ähnlich in einer React-Anwendung im Browser laufen. Vorausgesetzt wird nur,
+dass **MetaMask** oder ein ähnliches Browser-Plugin installiert ist. Dann kann
+unter jeden (kurzen!) Text  eine
+digitale Unterschrift gesetzt werden. (Bei grösseren Dokumenten wird ein Hashing-Verfahren [^1]
+eingesetzt und anschliessend der Hash signiert.)
+
+Wer aber unterschreiben kann, hat fast schon eine unverwechselbare eine digitale Identität.
+Für mich ist das *Mündigkeit*, und damit eine zeitgemässe Form der *Aufklärung*,
+ganz wie es Immanuel Kant schon im im Jahr 1783 formulierte:
+
+> Aufklärung ist der Ausgang des Menschen aus seiner selbst verschuldeten Unmündigkeit.
+
+Zu Kants Zeit wurde die Bedeutung *wissenschaftlichen Denkens* erkannt. Heute geht es um die
+Bedeutung *digitaler Kompetenz*.
+Signaturen gehören zu diesem Bereich.
 
 
-
-
-
-[^1]: Aus dem
-*privaten Schlüssel*  lässt sich stets die öffentliche Adresse
-des Ethereum-Accounts immer berechnen.
-
+[^1]: Ein digitales Hash-Verfahren ist ein Algorithmus,
+der Daten jeder Größe (wie Text, Bilder oder jede andere Datei) nimmt
+und daraus einen festen Größe String oder Zahlenwert, genannt Hashwert, erzeugt.
+Dieser Prozess ist einseitig:
+Während es einfach ist, aus den ursprünglichen Daten den Hashwert zu
+berechnen, ist es praktisch unmöglich,
+aus dem Hashwert die ursprünglichen Daten zu rekonstruieren.
+Das Besondere an einem Hashwert ist, dass er einzigartig für die spezifischen Eingabedaten ist.
+Selbst eine kleine Änderung in den Daten führt zu einem völlig anderen Hashwert.
+Diese Eigenschaft macht Hash-Verfahren nützlich für die Überprüfung
+der Integrität von Daten, da man leicht erkennen kann,
+ob sich die Daten verändert haben, indem man den Hashwert überprüft.
 
 

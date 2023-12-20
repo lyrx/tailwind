@@ -9,18 +9,15 @@ const SignerBalance: React.FC<{ contractAddress: string }> = ({ contractAddress 
   const context = useContext(Context)
   const [balance, setBalance] = useState<string>('--')
 
-  function signerDemo(signer: Signer) {
-    const message = 'Your message here'
-    signer.signMessage(message).then((signature: string) => {
-      const signerAddress = ethers.verifyMessage(message, signature)
-      signer.getAddress().then((address: string) => {
-        if (address === signerAddress) {
-          // signature check good!
-        } else {
-          // signature check bad!
-        }
-      })
-    })
+  async function signerDemo(signer, message) {
+    if (
+      (await signer.getAddress()) ===
+      ethers.verifyMessage(message, await signer.signMessage(message))
+    ) {
+      // signature check good!
+    } else {
+      // signature check bad!
+    }
   }
 
   useEffect(() => {
