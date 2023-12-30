@@ -8,12 +8,28 @@ summary: 'Was Sie schon immer über digitale Signaturen wissen wollten -- aber n
 images: ['/static/images/digital_signatures.png']
 ---
 
-![](/static/images/digital_signatures.png)
+> Aufklärung ist der Ausgang des Menschen aus seiner selbst verschuldeten Unmündigkeit.
 
-Heute und gestern habe ich mich wieder mal mit digitalen Signaturen beschäftigt. Auf Blockchains wird
-jede Transaktion digital signiert, und wer ein Krypto-Wallet benutzt, kann das nutzen, um
-beliebige Dokumente signieren. Das ist in wenigen Typescript-Zeilen
-ungefähr so zu implementieren:
+Immanuel Kant im Jahre 1783.
+
+![](/static/images/Kant_gemaelde_3.jpg)
+
+
+So sah dies Unterschrift dieses Mannes aus:
+
+![](/static/images/Immanuel_Kant_signature.svg)
+
+Unterschriften -- bis heute sind sie wesentliches Zeichen unserer Mündigkeit.
+
+Sie sind sogar ein wesentlicher Bestandteil unserer Identität. Und im digitalen Zeitalter
+sind deshalb
+**digitale Unterschriften** der **wichtigste** Bestandteil einer **digitalen Identität**.
+
+Auf Blockchains wird
+jede Transaktion digital signiert, und damit auch jede Finanztransaktion. Mehr noch:
+Wer ein Krypto-Wallet benutzt, kann das nutzen, um
+beliebige Dokumente signieren. Wir können in wenigen Zeilen Javascript demonstrieren,
+wie das aussehen kann:
 
 ```ts
 import { ethers, Signer } from 'ethers'
@@ -22,26 +38,37 @@ import { ethers, Signer } from 'ethers'
     if (
       (await signer.getAddress()) ===
       ethers.verifyMessage(message, await signer.signMessage(message))
-    ) [...]
+    ) {
+      [...]
+    }
   }
 
 ```
 
 Dieser Code könnte so ähnlich in einer React-Anwendung im Browser laufen. Vorausgesetzt wird nur,
-dass **MetaMask** oder ein ähnliches Browser-Plugin installiert ist. Dann kann
+dass **MetaMask** oder ein ähnliches Browser-Plugin installiert ist. Auf diese Weise kann
 unter jeden (kurzen!) Text  eine
-digitale Unterschrift gesetzt werden. (Bei grösseren Dokumenten wird ein Hashing-Verfahren [^1]
-eingesetzt und anschliessend der Hash signiert.)
+digitale Unterschrift gesetzt werden. Bei grösseren Dokumenten wird ein Hashing-Verfahren [^1]
+eingesetzt und anschliessend der Hash signiert.
 
-Wer aber unterschreiben kann, hat fast schon eine unverwechselbare eine digitale Identität.
-Für mich ist das *Mündigkeit*, und damit eine zeitgemässe Form der *Aufklärung*,
-ganz wie es Immanuel Kant schon im im Jahr 1783 formulierte:
+Wo Dokumente signiert werden können, da ist es nicht mehr weit bis zu Konstitutionen,
+Verfassungen, Regelwerken aller Art. Wer unterschreiben kann, kann wählen, sich verpflichten.
+Er oder sie kann, kaufen, verkaufen, leihen, vererben, erben. Fast jedes wichtige Recht, das wir heutzutage
+als Staatsbürger ausüben können, ist mit einer Unterschrift auf irgend eine Art und Weise verkoppelt.
 
-> Aufklärung ist der Ausgang des Menschen aus seiner selbst verschuldeten Unmündigkeit.
+Unser Leben beginnt mit der Unterschrift unter unseren Geburtsschein. Kindergarten, Schule,  Universität -- fast
+jeder wjikchtige Schritt, den wir im Leben tun, wird mit einer Unterschrift besiegelt. Ob wir heiraten
+oder uns scheiden lassen, ob wir ein Haus oder ein Auto kaufen, ob wir eine Arbeitstelle antreten
+oder einen Kredit aufnehmen -- immer ist alles von einer Unterschrift begleitet. Über Unterschriften
+regelt der Staat unser Leben, und zwar von der Wiege bis zur Bahre.
 
-Zu Kants Zeit wurde die Bedeutung *wissenschaftlichen Denkens* erkannt. Heute geht es um die
-Bedeutung *digitaler Kompetenz*.
-Signaturen gehören zu diesem Bereich.
+![](/static/images/digital_signatures.png)
+
+
+
+
+
+
 
 
 [^1]: Ein digitales Hash-Verfahren ist ein Algorithmus,
