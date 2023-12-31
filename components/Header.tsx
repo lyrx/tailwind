@@ -23,6 +23,7 @@ const Header = () => {
                 priority={true}
                 alt="Me On IT"
                 width={33}
+                // @ts-ignore
                 height={'auto'}
               />
             </div>
