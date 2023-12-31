@@ -23,7 +23,7 @@ const Header = () => {
                 priority={true}
                 alt="Me On IT"
                 width={33}
-                height={33}
+                height={'auto'}
               />
             </div>
             {typeof siteMetadata.headerTitle === 'string' ? (
