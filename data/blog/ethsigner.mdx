@@ -1,0 +1,106 @@
+---
+title: 'Digitale Unterschriften'
+date: '2023-12-22'
+lastmod: '2023-12-22'
+tags: ['Web3']
+draft: true
+summary: 'Was Sie schon immer über digitale Signaturen wissen wollten -- aber nicht zu fragen wagten.'
+images: ['/static/images/digital_signatures.png']
+---
+
+> Aufklärung ist der Ausgang des Menschen aus seiner selbst verschuldeten Unmündigkeit.
+
+Immanuel Kant im Jahre 1783.
+
+![](/static/images/Kant_gemaelde_3.jpg)
+
+
+So sah dies Unterschrift dieses Mannes aus:
+
+![](/static/images/Immanuel_Kant_signature.svg)
+
+Unterschriften -- bis heute sind sie wesentliches Zeichen unserer Mündigkeit.
+
+Sie sind sogar ein wesentlicher Bestandteil unserer Identität. **Im digitalen Zeitalter
+sind deshalb
+digitale Unterschriften der wichtigste Bestandteil einer digitalen Identität**.
+
+Auf Blockchains wird
+jede Transaktion digital signiert, und damit auch jede Finanztransaktion.
+Wer ein Krypto-Wallet benutzt, kann diese Fuktionalität nutzen, um
+beliebige Dokumente signieren. Wenigen Zeilen Javascript zeigen,
+wie das aussehen könnte:
+
+```ts
+import { ethers, Signer } from 'ethers'
+
+  async function signerDemo(signer, message) {
+    if (
+      (await signer.getAddress()) ===
+      ethers.verifyMessage(message, await signer.signMessage(message))
+    ) {
+      [...]
+    }
+  }
+
+```
+
+Dieser Code könnte so ähnlich in einem Web-Browser laufen.
+Unter jeden (kurzen!) Text kann auf diese Weise eine
+digitale Unterschrift gesetzt werden. Bei grösseren Dokumenten wird ein Hashing-Verfahren [^1]
+eingesetzt und anschliessend der Hash signiert. Ebenso kann man Bilder signieren, Musik, Filme,
+jede beliebige Datenmenge.
+
+Wo Dokumente signiert werden können, da ist es nicht mehr weit bis zu Regelwerken aller Art. Sogar Konstitutionen,
+Verfassungen und auch multinationale Verträge basieren darauf. Wer unterschreiben kann, kann wählen, sich verpflichten.
+Er oder sie kann, kaufen, verkaufen, leihen, vererben, erben. Fast jedes wichtige Recht, das wir heutzutage
+als Staatsbürger ausüben können, ist auf irgendeine Art und Weise an eine Unterschrift gekoppelt.
+
+Unser Leben beginnt mit der Unterschrift unter unseren Geburtsschein. Kindergarten, Schule, Universität -- fast
+jeder wichtige Schritt, den wir im Leben tun, wird mit einer Unterschrift besiegelt. Ob wir heiraten
+oder uns scheiden lassen, ob wir ein Haus oder ein Auto kaufen, ob wir eine Arbeitstelle antreten
+oder einen Kredit aufnehmen -- immer beginnt alles mit unserer Unterschrift. Über Unterschriften
+regelt der Staat unser Leben, von der Wiege bis zur Bahre.
+
+![](/static/images/digital_signatures.png)
+
+Ein Staat definiert sich zu einem wesentlichen Teil durch Unterschriften, die er selbst
+gibt oder zu denen er ermächtigt.
+
+Auch Geld, insbesondere Papiergeld ist einem signierten Schuldschein nicht unähnlich:
+Ein Staat bescheinigt darauf durch seine Unterschrift, dass er ein Papier als rechtmässiges
+Zahlungsmittel anerkennt. Die Autorität eines Staates beruht zu einem nicht geringen Anteil darauf,
+dass nur er auf diese Weise Geld legitimieren kann. Seine Unterschrift ist also bahres Geld.
+
+Kryptowährungen stehen deshalb tendenziell zu sogenannten Fiat-Währungen in einem Konkurrenzverhältnis.
+Würden sie sich tatsächlich durchsetzen, könnten sie
+ein entscheidendes staatliches Machtmonopol gefährden. Nicht zuletzt deshalb sind sie stark umstritten.
+
+Es soll aber hier nicht darum gehen, ob durch Kryptowährungen eine neue Form der Anarchie möglich werden
+könnte. Stattdessen verleihen wir der zugrundeliegenden Frage ein freundliches Gesicht, indem wir sie
+folgendermassen formulieren:
+**Wie müsste sich ein Staat ändern, damit er digitale Mündigkeit erlangen könnte?**
+
+![](/static/images/SignedDocuments.png)
+
+
+
+
+
+
+
+
+[^1]: Ein digitales Hash-Verfahren ist ein Algorithmus,
+der Daten jeder Größe (wie Text, Bilder oder jede andere Datei) nimmt
+und daraus einen festen Größe String oder Zahlenwert, genannt Hashwert, erzeugt.
+Dieser Prozess ist einseitig:
+Während es einfach ist, aus den ursprünglichen Daten den Hashwert zu
+berechnen, ist es praktisch unmöglich,
+aus dem Hashwert die ursprünglichen Daten zu rekonstruieren.
+Das Besondere an einem Hashwert ist, dass er einzigartig für die spezifischen Eingabedaten ist.
+Selbst eine kleine Änderung in den Daten führt zu einem völlig anderen Hashwert.
+Diese Eigenschaft macht Hash-Verfahren nützlich für die Überprüfung
+der Integrität von Daten, da man leicht erkennen kann,
+ob sich die Daten verändert haben, indem man den Hashwert überprüft.
+
+

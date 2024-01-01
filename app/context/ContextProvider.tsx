@@ -5,9 +5,14 @@ import {
   BlockOrNull,
   BlockSetterOrNull,
   BrowserProviderOrNull,
+  NetworkOrNull,
+  NetworkSetterOrNull,
+  DateSetterOrNull,
+  DateOrNull,
 } from '@/components/ethereum/EthersDerivedTypes'
 import { ethers } from 'ethers'
 import Context from './Context'
+import config from '../config'
 
 interface Props {
   children: ReactNode
@@ -34,7 +39,11 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
   }
 
   const [lastBlock, setLastBlock]: [BlockOrNull, BlockSetterOrNull] = useState<BlockOrNull>(null)
-
+  const [blockFirstSeen, setBlockFirstSeen]: [BlockOrNull, BlockSetterOrNull] =
+    useState<BlockOrNull>(null)
+  const [dateFirstSeen, setDateFirstSeen]: [DateOrNull, DateSetterOrNull] =
+    useState<DateOrNull>(null)
+  const [network, setNetwork]: [NetworkOrNull, NetworkSetterOrNull] = useState<NetworkOrNull>(null)
   const [web3Provider, setWeb3Provider] = useState<BrowserProviderOrNull>(
     // @ts-ignore
     typeof window !== 'undefined' && typeof window.ethereum !== 'undefined'
@@ -45,14 +54,30 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     maybeAddWalletListener()
-    // Define a function to fetch the block number
-    const fetchLastBlock = () => web3Provider?.getBlock('latest').then((b) => setLastBlock(b))
 
+    const fetchLastBlock = () =>
+      web3Provider?.getBlock('latest').then((b) => {
+        setLastBlock(b)
+      })
+
+    const fetchFirstBlock = () =>
+      web3Provider?.getBlock('latest').then((b) => {
+        setBlockFirstSeen(b)
+        setDateFirstSeen(new Date())
+      })
+
+    const fetchNetwork = () => web3Provider?.getNetwork().then((n) => setNetwork(n))
+    const syncWithBlockChain = () => {
+      fetchLastBlock()
+      //maybe more later
+    }
     // Fetch the block number immediately on component mount
-    fetchLastBlock()
+    syncWithBlockChain()
+    fetchFirstBlock()
+    fetchNetwork()
 
     // Set up an interval to fetch the block number every 12 seconds
-    const interval = setInterval(fetchLastBlock, 12000)
+    const interval = setInterval(syncWithBlockChain, config().syncRateMilliseconds)
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval)
@@ -66,7 +91,13 @@ const ContextProvider: React.FC<Props> = ({ children }) => {
           web3ProviderSetter: setWeb3Provider,
           lastBlock: lastBlock,
           lastBlockSetter: setLastBlock,
+          blockFirstSeen: blockFirstSeen,
+          blockFirstSeenSetter: setBlockFirstSeen,
           defaultMainNetProvider: ethers.getDefaultProvider('mainnet'),
+          network: network,
+          networkSetter: setNetwork,
+          dateFirstSeen: dateFirstSeen,
+          dateFirstSeenSetter: setDateFirstSeen,
         },
       }}
     >

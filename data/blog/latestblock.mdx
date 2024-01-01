@@ -1,0 +1,77 @@
+---
+title: 'Work Example: Synchronizing the Blockchain with the React Context'
+date: '2023-12-15'
+lastmod: '2023-12-15'
+tags: ['Web3']
+draft: false
+summary: 'An example of synchronization between a blockchain and a React application.'
+images: [/static/images/MeOnWeb3.png]
+authors: ['default']
+---
+
+![](/static/images/MeOnWeb3.png)
+
+
+This is the third part of my series on MetaMask, Ethers, and React.
+
+The result of my efforts to synchronize this blog with the blockchain can be seen [here](/ethereum).
+It always shows the block number of the last received block and its timestamp.
+
+Those who watch for a while to see if this is really a dynamic display will notice
+that block numbers are occasionally skipped. The blockchain (which was previously selected in MetaMask) is faster.
+
+What's behind this?
+
+The time interval for synchronization is set to 12,000 milliseconds. So it takes twelve seconds before MetaMask requests the latest block. If several blocks have been created during this time, then there will be jumps in the display.
+
+And now back to the source code. 😀
+
+Last time, I explained that the React context can be used to make changing information
+easily available for many components in the display.
+How this can happen can be seen [here](https://github.com/lyrx/tailwind/blob/main/app/context/ContextProvider.tsx).
+
+So there's a polling implemented like this:
+
+```tsx
+useEffect(() => {
+
+    // Define a function to fetch the block number
+    const fetchLastBlock = () => web3Provider?.getBlock('latest').then((b) => setLastBlock(b))
+
+    // Fetch the block number immediately on component mount
+    fetchLastBlock()
+
+    // Set up an interval to fetch the block number every 12 seconds
+    const interval = setInterval(fetchLastBlock, 12000)
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(interval)
+  }, [])
+```
+
+And so the context is then used to display the (somewhat) current block number.
+
+
+```tsx
+const BlockLastSeenNumber: React.FC = () => {
+  const context = useContext(Context)
+  return (
+    <span>
+      {context.ethersProvider?.lastBlock
+        ? context.ethersProvider.lastBlock.number.toString()
+        : '--'}
+    </span>
+  )
+}
+```
+
+That's not so complicated, is it? 😁
+
+That's it for today! Have fun digesting it! Next time there will be a
+bit more information about how React syncs with MetaMask (or not)...
+
+
+
+
+
+

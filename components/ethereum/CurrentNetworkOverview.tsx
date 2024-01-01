@@ -3,14 +3,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 
 import CurrentNetwork from '@/components/ethereum/CurrentNetwork'
-import LastBlockNumber from '@/components/ethereum/LastBlockNumber'
-import LastBlockTimestamp from '@/components/ethereum/LastBlockTimestamp'
-import Watch from '@/components/ethereum/Watch'
 import Context from '../../app/context/Context'
+import DisplayChainId from '@/components/ethereum/DisplayChainId'
+import ElapsedTime from '@/components/ethereum/ElapsedTime'
+import BlocksCreated from '@/components/ethereum/BlocksCreated'
+import config from '../../app/config'
+import BlockFirstSeenTimestamp from '@/components/ethereum/BlockFirstSeenTimestamp'
 
 const CurrentNetworkOverview: React.FC = () => {
   const context = useContext(Context)
   const [hasNetwork, setHasNetwork] = useState<boolean>(false)
+  const introStyle = 'text-primary-500'
   useEffect(() => {
     context?.ethersProvider?.web3Provider
       ?.getNetwork()
@@ -19,31 +22,21 @@ const CurrentNetworkOverview: React.FC = () => {
 
   return hasNetwork ? (
     <>
-      <h2>
-        Network configured in plugin: '<CurrentNetwork />'
-      </h2>
-      <table className="table-auto">
-        <tbody>
-          <tr>
-            <td>Last Block Number:</td>
-            <td>
-              <LastBlockNumber />
-            </td>
-          </tr>
-          <tr>
-            <td>Last block timestamp:</td>
-            <td>
-              <LastBlockTimestamp />
-            </td>
-          </tr>
-          <tr>
-            <td>Current Time:</td>
-            <td>
-              <Watch />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <p className={introStyle}>
+        This page demonstrates synchronizations with '<CurrentNetwork />' (Network-ID:{' '}
+        <DisplayChainId />
+        ). The sync rate is {config().syncRateMilliseconds} milliseconds.
+      </p>
+      <p className={introStyle}>
+        You can select the network using your browser plugin (MetaMask or other).
+      </p>
+      <p className={introStyle}>
+        Time elapsed between first and the latest sync is <ElapsedTime />.
+      </p>
+      <p className={introStyle}>
+        Counting <BlocksCreated /> new blocks. The first detected block has been created at{' '}
+        <BlockFirstSeenTimestamp />.
+      </p>
     </>
   ) : null
 }

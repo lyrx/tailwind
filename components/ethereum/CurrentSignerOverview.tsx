@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import CurrentSignerAddress from '@/components/ethereum/CurrentSignerAddress'
 import CurrentSignerBalance from '@/components/ethereum/CurrentSignerBalance'
 import Context from '../../app/context/Context'
+import LoginButton from '@/components/LoginButton'
 
 const CurrentNetworkOverview: React.FC = () => {
   const context = useContext(Context)
@@ -16,33 +17,7 @@ const CurrentNetworkOverview: React.FC = () => {
 
   return hasSigner ? (
     <>
-      <h2>Signer</h2>
-      <table className="table-auto">
-        <thead>
-          <tr>
-            <th>Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <CurrentSignerAddress />
-            </td>
-          </tr>
-        </tbody>
-        <thead>
-          <tr>
-            <th>Balance (ETH)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <CurrentSignerBalance />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <LoginButton />
     </>
   ) : null
 }

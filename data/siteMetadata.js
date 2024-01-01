@@ -3,7 +3,7 @@ const siteMetadata = {
   title: "Me on IT",
   author: 'Alexander Weinmann',
   headerTitle: 'Me On IT',
-  description: 'On IT, Web3, AI and Us',
+  description: 'My Work In IT And Web3',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.alexanderweinmann.com/',
