@@ -1,35 +1,34 @@
 ---
-title: 'Digitale Unterschriften'
+title: 'Digital signatures'
 date: '2023-12-22'
 lastmod: '2023-12-22'
 tags: ['Web3']
-draft: true
-summary: 'Was Sie schon immer über digitale Signaturen wissen wollten -- aber nicht zu fragen wagten.'
+draft: false
+summary: 'What you always wanted to know about digital signatures -- but were afraid to ask.'
 images: ['/static/images/digital_signatures.png']
 ---
 
-> Aufklärung ist der Ausgang des Menschen aus seiner selbst verschuldeten Unmündigkeit.
+> Enlightenment is man's emergence from his self-imposed immaturity.
 
 Immanuel Kant, 1783.
 
 ![](/static/images/Kant_gemaelde_3.jpg)
 
 
-So sah dies Unterschrift dieses Mannes aus:
+This is what Kant's signature looked like:
 
 ![](/static/images/Immanuel_Kant_signature.svg)
 
-Unterschriften -- bis heute sind sie wesentliches Zeichen unserer Mündigkeit.
+Signatures -- to this day, they are an essential symbol of our maturity.
 
-Sie sind sogar ein wesentlicher Bestandteil unserer Identität. **Im digitalen Zeitalter
-sind deshalb
-digitale Unterschriften der wichtigste Bestandteil einer digitalen Identität**.
+They are even an essential part of our identity. **In the digital age,
+digital signatures are therefore the most important component of a digital identity.**
 
-Auf Blockchains wird
-jede Transaktion digital signiert, und damit auch jede Finanztransaktion.
-Wer ein Krypto-Wallet benutzt, kann diese Fuktionalität nutzen, um
-beliebige Dokumente signieren. Wenigen Zeilen Javascript zeigen,
-wie das aussehen könnte:
+On blockchains,
+every transaction is digitally signed, including every financial transaction.
+Anyone using a crypto wallet can utilize this functionality to
+sign any documents. A few lines of JavaScript show
+what this could look like:
 
 ```ts
 import { ethers, Signer } from 'ethers'
@@ -44,64 +43,66 @@ import { ethers, Signer } from 'ethers'
   }
 
 ```
+This code could run similarly in a web browser.
+In this way, a digital signature can be added to any (short!) text. For larger documents, a hashing procedure [^1]
+is used, and subsequently, the hash is signed. Similarly, images, music, films,
+any amount of data can be signed.
 
-Dieser Code könnte so ähnlich in einem Web-Browser laufen.
-Unter jeden (kurzen!) Text kann auf diese Weise eine
-digitale Unterschrift gesetzt werden. Bei grösseren Dokumenten wird ein Hashing-Verfahren [^1]
-eingesetzt und anschliessend der Hash signiert. Ebenso kann man Bilder signieren, Musik, Filme,
-jede beliebige Datenmenge.
+Where documents can be signed, it's not far to rules of all kinds -- constitutions,
+charters, multinational treaties. Those who can sign can vote.
+Buy, sell, lend, bequeath, inherit, commit in some way. Almost every important right that we
+as citizens can exercise today is linked to a signature.
 
-Wo Dokumente signiert werden können, da ist es nicht mehr weit bis zu Regelwerken aller Art --  Konstitutionen,
-Verfassungen, multinationale Verträge. Wer unterschreiben kann, kann wählen.
-Kaufen, verkaufen, leihen, vererben, erben, sich irgendwie verpflichten. Fast jedes wichtige Recht, das wir heutzutage
-als Staatsbürger ausüben können, ist an eine Unterschrift gekoppelt.
-
-Unser Leben beginnt mit der Unterschrift unter einen Geburtsschein. Kindergarten, Schule, Universität -- fast
-jeder wichtige Schritt, den wir im Leben tun, wird mit einer Unterschrift besiegelt. Ob wir heiraten
-oder uns scheiden lassen, ob wir ein Haus oder ein Auto kaufen, ob wir eine Arbeitstelle antreten
-oder einen Kredit aufnehmen -- immer beginnt alles mit unserer Unterschrift. Unser Leben endet mit dem
-Totenschein. Über Unterschriften
-regelt der Staat von der Wiege bis zur Bahre einfach alles.
+Our life begins with the signature on a birth certificate. Kindergarten, school, university -- almost
+every important step we take in life is sealed with a signature. Whether we marry
+or divorce, whether we buy a house or a car, whether we start a job
+or take out a loan -- it all always begins with our signature. Our life ends with the
+death certificate. Through signatures,
+the state regulates simply everything from the cradle to the grave.
 
 ![](/static/images/digital_signatures.png)
 
-Auch Geld, insbesondere Papiergeld ist einem signierten Schuldschein nicht unähnlich:
-Ein Staat bescheinigt darauf durch seine Unterschrift, dass er ein Papier als rechtmässiges
-Zahlungsmittel anerkennt. Kryptowährungen benötigen keine Signatur, behalten aber das Konzept
-*Geld* bei und stehen deshalb zu Fiat-Währungen in einem Konkurrenzverhältnis.
+Even money, especially paper money, is not unlike a signed promissory note:
+A state certifies with its signature that it recognizes a paper as lawful
+currency. Cryptocurrencies do not require a signature, but they retain the concept
+of money and therefore are in competition with fiat currencies.
 
-Wir ziehen jetzt eine Verbindungslinie vom Ethereum-Account eines menschlichen Individuums,
-über dessen digitale Signatur hin zu seiner digitalen Identität:
+We now draw a line connecting the Ethereum account of a human individual,
+through their digital signature to their digital identity:
 
 ![](/static/images/SignedDocuments.png)
+The graphic shows a potential that, although technically realized, still falls far short of what is actually possible.
 
-Die Graphik zeigt ein Potential, das zwar auf technischer Ebene schon realisiert ist, bis jetzt aber
-noch weit hinter dem zurück bleibt, was eigentlich möglich ist.
+As mentioned, owning a "crypto wallet" in principle enables anyone to sign or endorse any
+document. I've already outlined how this works.
 
-Wie schon erwähnt, ermöglicht der Besitz eines "Crypto-Wallets" prinzipiell jedermann, beliebige
-Dokumente zu signieren bzw. zu unterschreiben. Wie das geht, habe ich bereits skizziert.
+**Case study**: Someone creates a digital image of their passport and then signs it with their
+crypto wallet.
+This can be used to verify whether the owner of the passport is the same as the owner of the "crypto wallet."
+The verification process is demonstrated in the above coding example.
 
-**Fallbeispiel**: Jemand erstellt ein digitales Bild seines Passes und signiert es dann mit seinem
-Krypto-Wallet.
-Damit kann überprüft werden, ob der Eigentümer des Passes identisch mit dem Eigentümer des "Krypto-Wallets"
-ist. Das geschieht so wie in dem obigen Coding-Beispiel demonstriert.
+The scanned passport must not be distributed uncontrolled over the internet,
+as this could lead to misuse. The passport should only be accessible to the owner,
+just as with a physical
+passport. However, the signed **hash** of the passport can be published anywhere
+because the passport data cannot be reconstructed from it.
 
-Der eingescannte Pass darf nicht unkontrolliert über das Internet
-verbreitet wird, da sonst Missbrauch möglich wird. Der Pass darf nur für den Eigentümer zugreifbar sein,
-genau wie das bei einem physischen
-Pass auch der Fall ist. Der signierte **Hash** des Passes dagegen kann an beliebiger Stelle veröffentlicht
-werden, denn aus ihm lassen sich die Passdaten nicht wieder herstellen.
+Thus, an individual can identify themselves to
+a trustworthy institution or a trustworthy company. All they need to do is present the scanned passport. This can then be associated with
+exactly one Ethereum account through the signature.
 
-So kann sich ein Individum kann sich
-gegenüber
-einem vertrauenswürdigen Institution / einem vertrauenswürdigen Unternehmen identifzieren. Dazu muss er
-nur noch den eingescanten Pass vorweisen. Dieser kann dann über die Signatur
-**genau einem Ethereum-Account** zugeordnet werden.
-
-**So ist mit geringem Aufwand eine digitale Identität entstanden.**
--- Die oben abgebildete Grafik ist bisher allerdings nur teilweise erklärt. Bei Interesse gerne mehr dazu ...
+**This way, a digital identity is created with little effort.**
+-- The graphic shown above is only partially explained so far. If interested, I can provide more information...
 
 
+[^1]: A digital hashing algorithm is a process that takes data of any size
+(such as text, images, or any other file) and generates a fixed-size string or numerical value called a hash value.
+This process is one-way: While it's easy to calculate the hash value from the original data,
+it's practically impossible to reconstruct the original data from the hash value.
+The unique aspect of a hash value is that it's distinct for the specific input data.
+Even a minor change in the data results in a completely different hash value.
+This characteristic makes hashing techniques useful for verifying data integrity,
+as one can easily detect if the data has been altered by checking the hash value.
 
 
 
@@ -109,18 +110,5 @@ nur noch den eingescanten Pass vorweisen. Dieser kann dann über die Signatur
 
 
 
-
-[^1]: Ein digitales Hash-Verfahren ist ein Algorithmus,
-der Daten jeder Größe (wie Text, Bilder oder jede andere Datei) nimmt
-und daraus einen festen Größe String oder Zahlenwert, genannt Hashwert, erzeugt.
-Dieser Prozess ist einseitig:
-Während es einfach ist, aus den ursprünglichen Daten den Hashwert zu
-berechnen, ist es praktisch unmöglich,
-aus dem Hashwert die ursprünglichen Daten zu rekonstruieren.
-Das Besondere an einem Hashwert ist, dass er einzigartig für die spezifischen Eingabedaten ist.
-Selbst eine kleine Änderung in den Daten führt zu einem völlig anderen Hashwert.
-Diese Eigenschaft macht Hash-Verfahren nützlich für die Überprüfung
-der Integrität von Daten, da man leicht erkennen kann,
-ob sich die Daten verändert haben, indem man den Hashwert überprüft.
 
 
