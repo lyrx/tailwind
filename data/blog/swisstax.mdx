@@ -1,0 +1,67 @@
+---
+title: 'Das Schweizer Steuersystem für Entwickler'
+date: '2024-01-06'
+lastmod: '2024-01-06'
+tags: ['Web3']
+draft: true
+summary: 'Ich erkläre das Schweizer Steuersystem an einfachen Coding-Beispielen in Javascript'
+images: []
+---
+
+Ich bin kein Steuerexperte, dennoch ist es für mich wie für jeden anderen interessant, möglichst
+viel vom Steuersystem des Landes zu verstehen, in welchem er lebt -- in meinem Fall die Schweiz.
+
+Ich habe ausserdem eine Leidenschaft für die Softwareentwicklung, also ist es für mich natürlich,
+möglichst vieles von dem, was ich von der Steuerberechnung verstehe, gleich in Code
+zu "giessen".
+
+Deshalb erkläre ich nun das, was ich vom Schweizer Steuersystem verstanden zu haben glaube, anhand
+von Code-Beispielen in Javascript.
+
+Die Schweizer Steuer setzt sich aus drei Anteilen zusammen, die jeweils auf unterschiedliche
+Landesteile in der Schweiz bezogen werden können.
+
+Die **Bundessteuer** ist eine einheitliche
+Steuer, die für das ganze Land erhoben wird.
+
+Die **kantonale Steuer** wird von den einzelnen Kantonen erhoben, in welche die Schweiz
+aufgeteilt ist. Die Kantone entsprechen grob den Bundesländern ion Deutschland.
+
+Jeder Kanton ist wiederum in Gemeinden aufgeteilt, und jede Gemeinde erhebt eine eigene
+**Gemeindesteuer**.
+
+Beginnen wir mit der **Bundessteuer**. Sie ist gestaffelt nach Höhe des Jahreseinkommens. Ab
+einem Jahreseinkommen von knapp einer Million entfällt die Staffelung. Es wird dann nur
+noch ein einheitlicher Prozentsatz erhoben. Eine Tabelle gibt darüber Auskunft, in welchem
+Einkommensintervall welche Steuer erhoben wird. Innerhalb eines solchen
+Intervalls erhöht sich diese Steuer zusätzlich in Schritten von CHF 100 um einen Betrag, der wiederum
+vom Intervall abhängt.
+
+Es handelt sich hier also um eine Art "geschachtelte" Staffelung, wobei die Schrittweite in
+der "inneren" Staffelung einheitlich CHF 100 beträgt. Die Schrittweite in der "äußeren" Staffelung
+ist uneinheitlich.
+
+Zudem wird zwischen Verheirateten und Alleinstehenden unterschieden.
+
+Gefunden habe ich die Steuertabelle nur als ein PDF, das
+nicht automatisch verarbeitet werden kann.
+Es wäre natürlich möglich, das PDF einfach von Hand abzuschreiben und in ein Format
+zu übertragen, welches mit Javascript weiter verarbeitet werden könnte.
+
+Ich  benutze aber stattdessen ein **Parameter-Tripel**:
+`[SteuerbaresEinkommenIntervallBeginn,BasisSteuer,IncrementPer100]`.
+Dieses
+Tripel kann ich der Tabelle auf einfache Weise entnehmen.  `BasisSteuer` ist die Bundessteuer, die
+entrichtet werden muss, wenn das eigene steuerbare Einkommen
+genau gleich `SteuerbaresEinkommenIntervallBeginn` ist. `IncrementPer100` bezeichnet den Betrag, der pro CHF 100
+zu `BasisSteuer` hinzugerechnet werden muss, die das eigene steuerbare Einkommen über `SteuerbaresEinkommenIntervallBeginn` liegt.
+(Wem das kompliziert erscheint, der hat sich noch nie ausführlich mit Steuerrechnung beschäftigt. Im deutschen
+Steuerrecht gibt es ganz andere Trümmer dieser Sorte.)
+
+
+
+
+
+
+
+
