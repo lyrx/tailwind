@@ -46,9 +46,17 @@ Zudem wird zwischen Verheirateten und Alleinstehenden unterschieden.
 Gefunden habe ich die Steuertabelle nur als ein PDF, das
 nicht automatisch verarbeitet werden kann.
 Es wäre natürlich möglich, das PDF einfach von Hand abzuschreiben und in ein Format
-zu übertragen, welches mit Javascript weiter verarbeitet werden könnte.
+zu übertragen, welches mit Javascript weiter verarbeitet werden könnte. Das habe
+ich nicht getan, sondern bin stattdessen etwas anders[^1] vorgegangen.
 
-Ich  benutze aber stattdessen ein **Parameter-Tripel**:
+Die Erklärung habe ich in eine Fussnote verbannt, weil sie
+langweilig und kompliziert ist. Wir sind hier nämlich an einem Punkt
+angelangt, an dem der Einsatz einer Programmiersprache Sinn macht. Durch sie behalten
+wir über unsere Finanzen die Kontrolle, ohne uns eine sperrigen und unzulänglichen
+Ausdrucksweise bedienen zu müssen, wie sie in Steuerdokumenten üblich ist.
+
+
+[^1]: Ich benutze ein **Parameter-Tripel**:
 `[SteuerbaresEinkommenIntervallBeginn,BasisSteuer,IncrementPer100]`.
 Dieses
 Tripel kann ich der Tabelle auf einfache Weise entnehmen.  `BasisSteuer` ist die Bundessteuer, die
@@ -57,9 +65,6 @@ genau gleich `SteuerbaresEinkommenIntervallBeginn` ist. `IncrementPer100` bezeic
 zu `BasisSteuer` hinzugerechnet werden muss, die das eigene steuerbare Einkommen über `SteuerbaresEinkommenIntervallBeginn` liegt.
 (Wem das kompliziert erscheint, der hat sich noch nie ausführlich mit Steuerrechnung beschäftigt. Im deutschen
 Steuerrecht gibt es ganz andere Trümmer dieser Sorte.)
-
-
-
 
 
 
