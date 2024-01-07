@@ -33,14 +33,19 @@ Beginnen wir mit der **Bundessteuer**. Sie wird über eine
 [Tabelle](https://www.estv.admin.ch/dam/estv/de/dokumente/dbst/tarife/58c-2023-dfi.pdf.download.pdf/58c-2023-dfi.pdf)
 definiert, die ich nur in einem
 schwer automatisch
-auszuwertenden  PDF-Format gefunden habe. Ich bin deshalb einen etwas anderen Weg[^1] gegangen,
-um die Berechnung der Bundessteuer wenigstens teilweise mit Javascript-Mitteln nachzuvollziehen.
+auszuwertenden  PDF-Format gefunden habe. Ich bin deshalb einen etwas anderen Weg gegangen,
+um die Berechnung der Bundessteuer wenigstens teilweise mit Javascript-Mitteln nachzuvollziehen:
 
-Wir schreiben jetzt eine JavaScript-Funktion. Sie
-wird anwendbar, sobald man aus der Tabelle
-für einen bestimmten steuerbaren Jahreslohn drei dazugehörige Zahlenwerte abgelesen hat, die man
-anschliessend in der Form `[SteuerbaresEinkommenIntervallBeginn,BasisSteuer,IncrementPer100]`
-als Parameter `tarife` übergibt:
+Ich benutze das **Parameter-Tripel**:
+`[SteuerbaresEinkommenIntervallBeginn,BasisSteuer,IncrementPer100]`.
+Dieses
+Tripel kann ich der Tabelle auf einfache Weise entnehmen.  `BasisSteuer` ist die Bundessteuer, die
+entrichtet werden muss, wenn das eigene steuerbare Einkommen
+genau gleich `SteuerbaresEinkommenIntervallBeginn` ist. `IncrementPer100` bezeichnet den Betrag, der pro CHF 100
+zu `BasisSteuer` hinzugerechnet werden muss, die das eigene steuerbare Einkommen über `SteuerbaresEinkommenIntervallBeginn` liegt.
+
+Das Tripel wird jetzt als
+als Parameter `tarife` an folgende Funktion übergeben:
 
 ```js
 
@@ -57,24 +62,10 @@ function(Einkommen,tarife){
 
 ```
 
-Manchmal ist es einfach besser, sich in einer Programmiersprache auszudrücken -- und ansonsten
-zu schweigen ...
+*Zum Schluss eine kleine Preisfrage: Warum ist die Funktion übergenau?* -- Bei der Antwort hilft
+ ein wenig Mathematik.[^1]
 
-... eins noch: *Preisfrage: Warum ist die obige Funktion übergenau?* (Bei der Antwort hilft
-nur ein wenig Mathematik.[^2])
-
-
-[^1]: Ich benutze ein **Parameter-Tripel**:
-`[SteuerbaresEinkommenIntervallBeginn,BasisSteuer,IncrementPer100]`.
-Dieses
-Tripel kann ich der Tabelle auf einfache Weise entnehmen.  `BasisSteuer` ist die Bundessteuer, die
-entrichtet werden muss, wenn das eigene steuerbare Einkommen
-genau gleich `SteuerbaresEinkommenIntervallBeginn` ist. `IncrementPer100` bezeichnet den Betrag, der pro CHF 100
-zu `BasisSteuer` hinzugerechnet werden muss, die das eigene steuerbare Einkommen über `SteuerbaresEinkommenIntervallBeginn` liegt.
-(Wem das kompliziert erscheint, der hat sich noch nie ausführlich mit Steuerrechnung beschäftigt. Im deutschen
-Steuerrecht gibt es ganz andere Trümmer dieser Sorte.)
-
-[^2]: `(rest / 100)` muss wohl noch ganzzahlig aufgerundet werden.
+[^1]: `(rest / 100)` muss wohl noch ganzzahlig aufgerundet werden.
 
 
 
