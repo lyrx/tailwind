@@ -36,32 +36,11 @@ schwer automatisch
 auszuwertenden  PDF-Format gefunden habe. Ich bin deshalb einen etwas anderen Weg[^1] gegangen,
 um die Berechnung der Bundessteuer wenigstens teilweise mit Javascript-Mitteln nachzuvollziehen.
 
-Die **Tabelle für die Berechnung der direkten Bundessteuer der natürlichen Personen** wirkt, als sei
-sie aus einem lange vergangenen Jahrhundert. Sie wäre noch immer ein sinnvolles Hilfsmittel,
-sässe der Steuereintreiber auch heute noch hinter einem grossen Schreibtisch
-und liesse sich die Steuerschuld Münze für Münze
-bar abzählen. Computer wären nie erfunden worden.
-
-Staunend schauen wir auf dieses Dokument der Hilflosigkeit. Auf einen Beweis dafür, dass Staaten nicht
-in der Lage sind, sich mit der Zeit im Takt des technologischen Fortschritts mitzubewegen.
-Dabei glaube ich noch nicht einmal, dass dies nur typisch für die
-Schweiz ist. Es ist  in den meisten Staaten so!
-
-Wir leben  in einer Zeit, in der die Finanzmathematik dabei ist, sich aus
-den Amtsstuben heraus in eine digitalisierte Welt hineinzubewegen.
-Also müssen wir uns fragen, ob so etwas Grundlegendes wie Lohnsteuern je
-sinnvoll digitalisiert werden wird. Und weiter: **Wird das Steuersystem je auf einer Blockchain
-landen und damit in einem verteilten und transparenten Netzwerk verarbeitet werden können?**
-
-Traditionen sind hartnäckig. Die katholische Kirche gibt es beispielsweise noch immer, obwohl
-sie sich inzwischen längst von ihrem geozentrischen Weltbild verabschieden
-und anerkennen musste, dass die Erde um die Sonne kreist. -- Wann wird
-es demzufolge Steuertabellen geben, die die Existenz des Computers anerkennen?
-
-Wir tun an dieser Stelle für die Schweizer Bundessteuer wenigstens das Menschenmögliche und
-präsentieren mit nachdenklich gerunzelter Stirn eine JavaScript-Funktion. Sie
-wird anwendbar, sobald sich jemand die oben erwähnte Tabelle etwas genauer angeschaut hat und
-für einen bestimmten steuerbaren Jahreslohn drei dazugehörige Zahlenwerte abgelesen hat:
+Wir schreiben jetzt eine JavaScript-Funktion. Sie
+wird anwendbar, sobald man aus der Tabelle
+für einen bestimmten steuerbaren Jahreslohn drei dazugehörige Zahlenwerte abgelesen hat, die man
+anschliessend in der Form `[SteuerbaresEinkommenIntervallBeginn,BasisSteuer,IncrementPer100]`
+als Parameter `tarife` übergibt:
 
 ```js
 
