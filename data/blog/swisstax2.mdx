@@ -15,18 +15,17 @@ Im [ersten Teil](swisstax) ging es um die Schweizer **Bundessteuer**. Jetzt soll
 
 In diesem Zusammenhang ist oft vom **Steuerfuss** die Rede. Das ist ein relativer Wert, der sich
 von Kanton zu Kanton und von Gemeinde zu Gemeinde unterscheidet. Ebenso wichtig aber ist der
-Absolutwert, auf den sich dieser *Steuerfuss* bezieht. Damit es nicht zu einfach wird, unterscheidet
-sich aber auch dieser Absolutwert von Kanton zu Kanton, und es ist auffällig schwierig, ihn
-herauszubekommen. Sogar die dafür benutzte offizielle Bezeichnung zu finden fiel mir schwer!
+Absolutwert, auf den sich dieser *Steuerfuss* bezieht. Allerdings unterscheidet
+sich  auch dieser Absolutwert von Kanton zu Kanton.
 
 Es ist die **einfache Staatssteuer** 🥵.
 
 Die Zahlen für die
 **einfache Staatssteuer**
-werden gut versteckt gehalten. Ich habe schliesslich die
-[Kantonsblätter](https://www.estv.admin.ch/estv/de/home/die-estv/steuersystem-schweiz/kantonsblaetter.html)
-gefunden, wo etwas wiederwillig Auskunft gegeben wird.
-Aus diesen entnehmen wir die Zahlen für den Kanton Zürich und 2023. Wir schreiben erleichtert:
+habe ich schliesslich in den
+[Kantonsblättern](https://www.estv.admin.ch/estv/de/home/die-estv/steuersystem-schweiz/kantonsblaetter.html)
+gefunden.
+Wenn wir dem Kantonsblatt für den Kanton Zürich die Werte für 2023 entnehmen, können wir schreiben:
 
 
 
@@ -47,10 +46,8 @@ const grundtarif = [
         [13,254900] // 13 % für die Einkommensteile über 254'900 CHF
     ]
 ```
-Hier war zum Glück das Zahlenkonglomerat im PDF so übersichtlich, dass es problemlos
-manuell übertragen werden konnte. 😀
 
-Für die Berechnung der **einfachen Steuer** können wir nun voller Stolz sagen:
+Für die Berechnung der **einfachen Steuer** schreiben wir dann diese einfache Funktion:
 
 ```js
 function berechneStaatssteuerZuerich(einkommen, grundtarif) {
@@ -61,17 +58,15 @@ function berechneStaatssteuerZuerich(einkommen, grundtarif) {
     }
 ```
 
+(*Hier wird recht elegant mit `reduce` und einem Funktionsliteral über den Grundtarif
+gegangen wird, um die Steuerlast  "einzusammeln"*. 😉)
 
-
-(*Man beachte, wie hier äusserst elegant mit `reduce` und einem Funktionsliteral über den Grundtarif
-gegangen wird, um die Steuerlast gewissermassen "einzusammeln"*. 😉)
-
-Das wäre natürlich viel zu simpel, gebe es für die Berechnung der kantonalen Steuer nicht noch
-einen "jahresasbhängigen"
+Allerdings gibt es für die Berechnung der kantonalen Steuer noch
+einen *vom Kalenderjahr abhängenden*
 [Steuerfuss](https://www.zh.ch/de/news-uebersicht/mitteilungen/2022/steuern-finanzen/steuern/steuerfuss-fuer-die-jahre-2022-und-2023.html).
-In unserem Fall sind das für den Kanton Zürich und das Jahr 2023 schlappe 99 % der einfachen Staatssteuer.
+In unserem Fall sind das für den Kanton Zürich und das Jahr 2023 genau 99 % der einfachen Staatssteuer.
 
-Wir danken freundlich und korrigieren unsere Rechnung wie folgt:
+Wir korrigieren unsere Rechnung wie folgt:
 
 ```js
 function berechneStaatssteuer23Zuerich(einkommen, grundtarif,steuerFuss) {
@@ -80,8 +75,8 @@ function berechneStaatssteuer23Zuerich(einkommen, grundtarif,steuerFuss) {
     }
 ```
 
-Nun verbleibt nur noch die Gemeindesteuer mit ihrem zugehörigen Steuerfuss. Es wird einfacher!! Wir
-notieren nur noch:
+Nun verbleibt nur noch die Gemeindesteuer mit ihrem zugehörigen Steuerfuss. Es wird einfacher! Wir
+notieren:
 
 ```js
 function berechneGemeindesteuer(einkommen, grundtarif,steuerFuss) {
@@ -90,13 +85,5 @@ function berechneGemeindesteuer(einkommen, grundtarif,steuerFuss) {
     }
 ```
 
-... und zitieren zum Schluss einen deutschen Kommunisten:
-
-> Wir stehen selbst enttäuscht und sehn betroffen \
-> Den Vorhang zu und alle Fragen offen.
-
-Bertold Brecht
-
-Hoffentlich sind nicht wirklich **alle** Fragen offen geblieben.
 -- Wie man jedoch den
-Steuerfuss für die eigene Gemeinde herausbekommt, das zu klären überlassen wir  dem Leser 😛.
+Steuerfuss für die eigene Gemeinde herausbekommt, das zu klären überlassen wir bewusst dem Leser 😛.
