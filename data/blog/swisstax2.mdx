@@ -1,91 +1,82 @@
 ---
-title: 'Das Schweizer Steuersystem für Entwickler, zwoter Teil'
+title: 'The Swiss Tax System for Developers, Part Two'
 date: '2024-01-07'
 lastmod: '2024-01-07'
 tags: ['Web3']
 draft: false
-summary: 'Ich erkläre das Schweizer Steuersystem an einfachen Coding-Beispielen in Javascript'
+summary: 'I explain the Swiss tax system using simple coding examples in Javascript'
 images: [/static/images/gemeindesteuer.png]
 ---
 
 ![](/static/images/gemeindesteuer.png)
 
-Im [ersten Teil](swisstax) ging es um die Schweizer **Bundessteuer**. Jetzt soll es um die
-**kantonale Steuer** und um die **Gemeindesteuer** gehen.
+In the [first part](swisstax), it was about the Swiss **Federal Tax**. Now it's about the
+**Cantonal Tax** and the **Municipal Tax**.
 
-In diesem Zusammenhang ist oft vom **Steuerfuss** die Rede. Das ist ein relativer Wert, der sich
-von Kanton zu Kanton und von Gemeinde zu Gemeinde unterscheidet. Ebenso wichtig aber ist der
-Absolutwert, auf den sich dieser *Steuerfuss* bezieht. Allerdings unterscheidet
-sich  auch dieser Absolutwert von Kanton zu Kanton.
+In this context, there is often talk of the **tax rate**. This is a relative value that differs
+from canton to canton and from municipality to municipality. But equally important is the
+absolute value to which this *tax rate* refers. However, this absolute value also varies from canton to canton.
 
-Es ist die **einfache Staatssteuer** 🥵.
+It's the **simple state tax** 🥵.
 
-Die Zahlen für die
-**einfache Staatssteuer**
-habe ich schliesslich in den
-[Kantonsblättern](https://www.estv.admin.ch/estv/de/home/die-estv/steuersystem-schweiz/kantonsblaetter.html)
-gefunden.
-Wenn wir dem Kantonsblatt für den Kanton Zürich die Werte für 2023 entnehmen, können wir schreiben:
-
-
+I finally found the numbers for the
+**simple state tax**
+in the
+[Cantonal Sheets](https://www.estv.admin.ch/estv/de/home/die-estv/steuersystem-schweiz/kantonsblaetter.html).
+If we take the values for 2023 from the cantonal sheet for the canton of Zurich, we can write:
 
 ```js
-const grundtarif = [
-        [0,  6700], // 0 % für die ersten 6700
-        [2,  4700], // 2 % für die weiteren 4700
-        [3,  4700], // Analog zu oben
-        [4,  7600], // Analog zu oben
-        [5,  9300], // Analog zu oben
-        [6, 10700], // Analog zu oben
-        [7, 12400], // Analog zu oben
-        [8, 16900], // Analog zu oben
-        [9, 32500], // Analog zu oben
-        [10,32200], // Analog zu oben
-        [11,51000], // Analog zu oben
-        [12,66200], // Analog zu oben
-        [13,254900] // 13 % für die Einkommensteile über 254'900 CHF
+const basicRate = [
+        [0,  6700], // 0% for the first 6700
+        [2,  4700], // 2% for the next 4700
+        [3,  4700], // Same as above
+        [4,  7600], // Same as above
+        [5,  9300], // Same as above
+        [6, 10700], // Same as above
+        [7, 12400], // Same as above
+        [8, 16900], // Same as above
+        [9, 32500], // Same as above
+        [10,32200], // Same as above
+        [11,51000], // Same as above
+        [12,66200], // Same as above
+        [13,254900] // 13% for income parts over 254,900 CHF
     ]
 ```
 
-Für die Berechnung der **einfachen Steuer** schreiben wir dann diese einfache Funktion:
+For calculating the **simple tax**, we then write this simple function:
 
 ```js
-function berechneStaatssteuerZuerich(einkommen, grundtarif) {
-        return grundtarif.reduce(([steuer, rest], [prozent, betrag]) => {
-            let zuVersteuern = Math.min(betrag, rest);
-            return [steuer + zuVersteuern * (prozent / 100), rest - zuVersteuern];
-        }, [0, einkommen])[0];
+function calculateStateTaxZurich(income, basicRate) {
+        return basicRate.reduce(([tax, remainder], [percent, amount]) => {
+            let taxable = Math.min(amount, remainder);
+            return [tax + taxable * (percent / 100), remainder - taxable];
+        }, [0, income])[0];
     }
 ```
 
-(*Hier wird recht elegant mit `reduce` und einem Funktionsliteral über den Grundtarif
-gegangen wird, um die Steuerlast  "einzusammeln"*. 😉)
+(*Here, the basic rate is quite elegantly iterated over with `reduce` and a function literal to "collect" the tax burden*. 😉)
 
-Allerdings gibt es für die Berechnung der kantonalen Steuer noch
-einen *vom Kalenderjahr abhängenden*
-[Steuerfuss](https://www.zh.ch/de/news-uebersicht/mitteilungen/2022/steuern-finanzen/steuern/steuerfuss-fuer-die-jahre-2022-und-2023.html).
-In unserem Fall sind das für den Kanton Zürich und das Jahr 2023 genau 99 % der einfachen Staatssteuer.
+However, for the calculation of the cantonal tax, there is also a *calendar year-dependent*
+[tax rate](https://www.zh.ch/de/news-uebersicht/mitteilungen/2022/steuern-finanzen/steuern/steuerfuss-fuer-die-jahre-2022-und-2023.html).
+In our case, for the canton of Zurich and the year 2023, that's exactly 99% of the simple state tax.
 
-Wir korrigieren unsere Rechnung wie folgt:
+We correct our calculation as follows:
 
 ```js
-function berechneStaatssteuer23Zuerich(einkommen, grundtarif,steuerFuss) {
-       const staatsSteuer = berechneStaatssteuerZuerich(einkommen,grundtarif);
-        return staatsSteuer * (steuerFuss / 100);
+function calculateStateTax23Zurich(income, basicRate, taxRate) {
+       const stateTax = calculateStateTaxZurich(income, basicRate);
+        return stateTax * (taxRate / 100);
     }
 ```
 
-Nun verbleibt nur noch die Gemeindesteuer mit ihrem zugehörigen Steuerfuss. Es wird einfacher! Wir
-notieren:
+Now only the municipal tax with its associated tax rate remains. It gets simpler! We note:
 
 ```js
-function berechneGemeindesteuer(einkommen, grundtarif,steuerFuss) {
-       const staatsSteuer = this.berechneStaatssteuer(einkommen,grundtarif);
-        return staatsSteuer * (steuerFuss / 100);
+function calculateMunicipalTax(income, basicRate, taxRate) {
+       const stateTax = this.calculateStateTax(income, basicRate);
+        return stateTax * (taxRate / 100);
     }
 ```
 
-
-
--- Wie man jedoch den
-Steuerfuss für die eigene Gemeinde herausbekommt, das zu klären überlassen wir bewusst dem Leser 😛.
+-- However, finding out the
+tax rate for your own municipality is something we deliberately leave to the reader 😛.

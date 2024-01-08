@@ -8,16 +8,16 @@ import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer
 import { allPrivates, allAuthors, Private } from 'contentlayer/generated'
 import type { Authors, Blog } from 'contentlayer/generated'
 import PostSimple from '@/layouts/PostSimple'
-import PostLayout from '@/layouts/PostLayout'
+import PrivateLayout from '@/layouts/PrivateLayout'
 import PostBanner from '@/layouts/PostBanner'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
 
-const defaultLayout = 'PostLayout'
+const defaultLayout = 'PrivateLayout'
 const layouts = {
   PostSimple,
-  PostLayout,
+  PrivateLayout,
   PostBanner,
 }
 

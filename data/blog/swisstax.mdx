@@ -1,72 +1,47 @@
 ---
-title: 'Das Schweizer Steuersystem für Entwickler'
+title: 'The Swiss Tax System for Developers'
 date: '2024-01-06'
 lastmod: '2024-01-06'
 tags: ['Web3']
 draft: false
-summary: 'Ich erkläre das Schweizer Steuersystem an einfachen Coding-Beispielen in Javascript'
+summary: 'I explain the Swiss tax system using simple coding examples in Javascript'
 images: [/static/images/bundessteuer.png]
 ---
 
 ![](/static/images/bundessteuer.png)
 
-Ich bin kein Steuerexperte, dennoch ist es für mich wie für jeden anderen interessant, möglichst
-viel vom Steuersystem des Landes zu verstehen, in welchem er lebt -- in meinem Fall die Schweiz.
+I am not a tax expert, but like everyone else, it's interesting for me to understand as much as possible about the tax system of the country in which I live -- in my case, Switzerland.
 
-Ich habe ausserdem eine Leidenschaft für die Softwareentwicklung, also ist es für mich natürlich,
-möglichst vieles von dem, was ich von der Steuerberechnung verstehe, gleich in Code
-zu "giessen".
+I also have a passion for software development, so it's natural for me to try to translate as much as I understand about tax calculation into code.
 
-Die Schweizer Steuer setzt sich aus drei Anteilen zusammen, die jeweils auf unterschiedliche
-Landesteile in der Schweiz bezogen werden können.
+The Swiss tax is composed of three parts, each of which can be related to different regions in Switzerland.
 
-Die **Bundessteuer** ist eine einheitliche
-Steuer, die für das ganze Land erhoben wird.
+The **federal tax** is a uniform tax levied across the entire country.
 
-Die **kantonale Steuer** wird von den einzelnen Kantonen erhoben, in welche die Schweiz
-aufgeteilt ist. Die Kantone entsprechen grob den Bundesländern in Deutschland.
+The **cantonal tax** is levied by the individual cantons into which Switzerland is divided. The cantons roughly correspond to the federal states in Germany.
 
-Jeder Kanton ist wiederum in Gemeinden aufgeteilt, und jede Gemeinde erhebt eine eigene
-**Gemeindesteuer**.
+Each canton is in turn divided into municipalities, and each municipality levies its own **municipal tax**.
 
-Beginnen wir mit der **Bundessteuer**. Sie wird über eine
-[Tabelle](https://www.estv.admin.ch/dam/estv/de/dokumente/dbst/tarife/58c-2023-dfi.pdf.download.pdf/58c-2023-dfi.pdf)
-definiert, die ich nur in einem
-schwer automatisch
-auszuwertenden  PDF-Format gefunden habe. Ich bin deshalb einen etwas anderen Weg gegangen,
-um die Berechnung der Bundessteuer wenigstens teilweise mit Javascript-Mitteln nachzuvollziehen:
+Let's start with the **federal tax**. It is defined via a [table](https://www.estv.admin.ch/dam/estv/de/dokumente/dbst/tarife/58c-2023-dfi.pdf.download.pdf/58c-2023-dfi.pdf) that I found in a PDF format, which is difficult to evaluate automatically. Therefore, I've taken a slightly different approach to understand the calculation of the federal tax at least partially with Javascript means:
 
-Ich benutze das **Parameter-Tripel**:
-`[SteuerbaresEinkommenIntervallBeginn,BasisSteuer,IncrementPer100]`.
-Dieses
-Tripel kann ich der Tabelle auf einfache Weise entnehmen.  `BasisSteuer` ist die Bundessteuer, die
-entrichtet werden muss, wenn das eigene steuerbare Einkommen
-genau gleich `SteuerbaresEinkommenIntervallBeginn` ist. `IncrementPer100` bezeichnet den Betrag, der pro CHF 100
-zu `BasisSteuer` hinzugerechnet werden muss, die das eigene steuerbare Einkommen über `SteuerbaresEinkommenIntervallBeginn` liegt.
+I use the **parameter triplet**: `[TaxableIncomeIntervalStart, BaseTax, IncrementPer100]`. I can easily extract this triplet from the table. `BaseTax` is the federal tax that must be paid if one's own taxable income is exactly `TaxableIncomeIntervalStart`. `IncrementPer100` denotes the amount that must be added to `BaseTax` for every CHF 100 that one's own taxable income exceeds `TaxableIncomeIntervalStart`.
 
-Das Tripel wird jetzt als
-als Parameter `tarife` an folgende Funktion übergeben:
+This triplet is now passed as the parameter `tarife` to the following function:
 
-```js§  <
-
-function(Einkommen,tarife){
-        const SteuerbaresEinkommenIntervallBeginn = tarife[0]
-        const BasisSteuer = tarife[1]
+```js
+function(Income,tarife){
+        const TaxableIncomeIntervalStart = tarife[0]
+        const BaseTax = tarife[1]
         const IncrementPer100 = tarife[2]
 
-        const rest = Einkommen - SteuerbaresEinkommenIntervallBeginn
-        const steuerRest = (rest / 100) * IncrementPer100
+        const remainder = Income - TaxableIncomeIntervalStart
+        const taxRemainder = (remainder / 100) * IncrementPer100
 
-        return BasisSteuer + steuerRest
+        return BaseTax + taxRemainder
     }
 
 ```
 
-*Zum Schluss eine kleine Preisfrage: Warum ist die Funktion übergenau?* -- Bei der Antwort hilft
- ein wenig Mathematik.[^1]
+*Finally, a small prize question: Why is the function overly precise?* -- The answer is helped by a bit of mathematics.[^1]
 
-[^1]: `(rest / 100)` muss wohl noch ganzzahlig aufgerundet werden.
-
-
-
-
+[^1]: `(remainder / 100)` probably needs to be rounded up to an integer.
