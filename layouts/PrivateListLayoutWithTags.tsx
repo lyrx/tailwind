@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Private } from 'contentlayer/generated'
 import tagData from 'app/tag-data.json'
+import Link from '@/components/Link'
 
 interface PaginationProps {
   totalPages: number
@@ -37,7 +38,14 @@ export default function ListLayoutWithTags({
         </div>
         <div className="flex sm:space-x-24">
           <div>
-            <p>Hidden content! Please leave!</p>
+            <p>
+              <Link
+                href={`/ethereum`}
+                className="font-bold uppercase text-gray-700 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
+              >
+                Ethereum-Testseite
+              </Link>
+            </p>
           </div>
         </div>
       </div>
